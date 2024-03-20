@@ -1,4 +1,8 @@
 body {
     margin: 0;
     overflow-x: hidden;
+
+    & .MuiPaper-root {
+        width: 100%;
+    }
 }

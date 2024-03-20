@@ -7,10 +7,23 @@ export const Main = styled.div`
 `;
 
 export const Container = styled.div`
-  display: flex;
   position: absolute;
   top: 102px;
   left: 180px;
+  padding: 48px 32px;
+  width: calc(100% - 180px - 64px);
+
+  .space-between {
+    justify-content: space-between;
+  }
+`;
+
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 16px 0;
+  gap: 16px;
 `;
 
 export const Header = styled.header`
@@ -165,4 +178,137 @@ export const Label = styled.label`
   font-style: normal;
   font-weight: 700;
   line-height: 24px;
+`;
+
+export const Button = styled.button<{ $primary?: boolean }>`
+  display: flex;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  border-radius: 40px;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  opacity: ${(props) => (props.disabled ? "0.5" : "1")};
+  border: ${(props) => (props.$primary ? "none" : "1px solid #00B596")};
+  background: ${(props) => (props.$primary ? "#00B596" : "none")};
+  color: ${(props) => (props.$primary ? "#FFFFFF" : "#00B596")};
+
+  span {
+    font-family: "Public Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+  }
+`;
+
+export const IconButton = styled.div`
+  align-items: center;
+  display: flex;
+`;
+
+export const Title = styled.span`
+  font-family: "Public Sans";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  color: #00b596;
+  border-bottom: 1px solid #00b596;
+  padding-bottom: 8px;
+  display: flex;
+`;
+
+export const Input = styled.div<{ $error?: boolean }>`
+  width: 25%;
+
+  & .MuiFormControl-root {
+    width: 100%;
+
+    & label {
+      font-family: "Public Sans";
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 21px;
+      color: #272727;
+    }
+
+    & label:not(.MuiInputLabel-shrink) {
+      transform: translate(24px, 10px) scale(1);
+    }
+
+    & .MuiInputLabel-shrink {
+      padding: 1px;
+      background: #ffffff;
+    }
+
+    & .MuiInputBase-root {
+      & .MuiSelect-select {
+        padding: 10px 14px;
+      }
+
+      & fieldset {
+        border-radius: 24px;
+        border: 1px solid #c3ccd6;
+      }
+    }
+  }
+
+  .MuiSvgIcon-root {
+    color: #272727;
+  }
+`;
+
+export const HelperText = styled.p`
+  color: rgba(0, 0, 0, 0.6);
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.66;
+  letter-spacing: 0.03333em;
+  text-align: left;
+  margin-top: 3px;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+`;
+
+export const Modal = styled.div`
+  width: calc(100% - 40px);
+  padding: 16px 20px;
+`;
+
+export const HeaderModal = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  & .MuiDialogTitle-root {
+    padding: 32px 40px;
+    color: #00b596;
+    font-family: "Public Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  & .MuiButtonBase-root {
+    padding: 32px 40px;
+  }
+`;
+
+export const DividerModal = styled.div`
+  height: 1px;
+  background: #c3ccd6;
+  width: 75%;
+  display: flex;
+  align-self: center;
+`;
+
+export const FooterModal = styled.div`
+  display: flex;
+  width: calc(100% - 40px);
+  justify-content: flex-end;
+  padding: 16px 20px;
 `;
