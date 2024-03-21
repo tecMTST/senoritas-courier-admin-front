@@ -17,9 +17,9 @@ const Close = ({ width, height, color }: Props): JSX.Element => (
     <path
       d="M18 6L6 18M6 6L18 18"
       stroke={color ?? "#00B596"}
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );

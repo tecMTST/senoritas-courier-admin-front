@@ -1,7 +1,7 @@
 import React, { memo, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
-import MenuIcon from "../assets/icons/MenuIcon";
-import * as S from "../App.style";
+import MenuIcon from "../../assets/icons/MenuIcon";
+import * as S from "./style";
 
 const Menu = (): JSX.Element => {
   const history = useHistory();
@@ -76,34 +76,34 @@ const Menu = (): JSX.Element => {
 
   return (
     <S.Menu>
-      <S.MenuTop>
+      <S.Top>
         {items
           ?.filter((item) => item?.position === "top")
           ?.map((item) => (
-            <S.MenuItem
+            <S.Item
               key={Math.random()}
               onClick={() => item?.onClick(item?.id)}
               $selected={item?.id === selected}
             >
               <MenuIcon />
               <S.Label>{item?.text}</S.Label>
-            </S.MenuItem>
+            </S.Item>
           ))}
-      </S.MenuTop>
-      <S.MenuBottom>
+      </S.Top>
+      <S.Bottom>
         {items
           ?.filter((item) => item?.position === "bottom")
           ?.map((item) => (
-            <S.MenuItem
+            <S.Item
               key={Math.random()}
               onClick={() => item?.onClick(item?.id)}
               $selected={item?.id === selected}
             >
               <MenuIcon />
               <S.Label>{item?.text}</S.Label>
-            </S.MenuItem>
+            </S.Item>
           ))}
-      </S.MenuBottom>
+      </S.Bottom>
     </S.Menu>
   );
 };

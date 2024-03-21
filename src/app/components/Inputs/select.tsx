@@ -6,7 +6,7 @@ import {
   MenuItem,
   SelectProps,
 } from "@mui/material";
-import * as S from "../App.style";
+import * as S from "./style";
 
 interface Props {
   label: string;

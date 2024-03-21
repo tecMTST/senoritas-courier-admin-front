@@ -1,6 +1,6 @@
 import React, { memo, useMemo, useState } from "react";
-import MenuIcon from "../assets/icons/MenuIcon";
-import * as S from "../App.style";
+import MenuIcon from "../../assets/icons/MenuIcon";
+import * as S from "./style";
 
 const Header = (): JSX.Element => {
   const [selected, setSelected] = useState(0);
@@ -57,28 +57,28 @@ const Header = (): JSX.Element => {
 
   return (
     <S.Header>
-      <S.HeaderLogo>logo</S.HeaderLogo>
-      <S.HeaderItems>
+      <S.Logo>logo</S.Logo>
+      <S.Items>
         {tabs?.map((tab, index) => (
-          <S.HeaderTab
+          <S.Tab
             key={Math.random()}
             onClick={() => tab?.onClick(index)}
             $selected={selected === index}
           >
             <MenuIcon color={selected === index ? "#00b596" : "#717d96"} />
             <S.Label>{tab?.text}</S.Label>
-          </S.HeaderTab>
+          </S.Tab>
         ))}
         {buttons?.map((button) => (
-          <S.HeaderButton
+          <S.Button
             key={Math.random()}
             onClick={button?.onClick}
             $type={button?.type}
           >
             <S.Label>{button?.text}</S.Label>
-          </S.HeaderButton>
+          </S.Button>
         ))}
-      </S.HeaderItems>
+      </S.Items>
     </S.Header>
   );
 };

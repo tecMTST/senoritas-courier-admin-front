@@ -1,9 +1,9 @@
-import React, { memo, useCallback, useState } from "react";
+import React, { memo, useCallback, useMemo, useState } from "react";
 import Search from "../assets/icons/Search";
-import Button from "../components/button";
-import Modal from "../components/modal";
-import Select from "../components/select";
-import * as S from "../App.style";
+import Button from "../components/Button";
+import Modal from "../components/Modal";
+import Select from "../components/Inputs/select";
+import * as S from "./style";
 
 const SingleDeliveries = (): JSX.Element => {
   const [status, setStatus] = useState("");
@@ -25,6 +25,17 @@ const SingleDeliveries = (): JSX.Element => {
   const onChangeModal = useCallback(() => setOpenModal((prev) => !prev), []);
 
   const onExport = useCallback(() => console.log("exportar"), []);
+
+  const buttons = useMemo(
+    () => [
+      {
+        text: "Exportar",
+        onClick: onExport,
+        primary: true,
+      },
+    ],
+    [onExport]
+  );
 
   return (
     <>
@@ -52,14 +63,14 @@ const SingleDeliveries = (): JSX.Element => {
           onChange={onChangeBiker}
         />
       </S.Row>
-      <Modal open={openModal} onClose={onChangeModal} title="Pedido A">
+      <Modal
+        open={openModal}
+        onClose={onChangeModal}
+        buttons={buttons}
+        title="Pedido A"
+      >
         <>
-          <S.Modal>
-            <div>detalhes</div>
-          </S.Modal>
-          <S.FooterModal>
-            <Button primary text="Exportar" onClick={onExport} />
-          </S.FooterModal>
+          <div>detalhes</div>
         </>
       </Modal>
     </>

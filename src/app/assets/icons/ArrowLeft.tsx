@@ -17,14 +17,14 @@ const ArrowLeft = ({ width, height, color }: Props): JSX.Element => (
     <path
       d="M19 12H5"
       stroke={color ?? "#00B596"}
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M12 19L5 12L12 5"
       stroke={color ?? "#00B596"}
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
