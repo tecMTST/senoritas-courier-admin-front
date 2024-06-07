@@ -15,6 +15,7 @@ interface Props {
   error?: boolean;
   options: { label: string; value: string | number }[];
   variant: "filled" | "standard" | "outlined";
+  classname?: string;
 }
 
 const Select = ({
@@ -26,12 +27,13 @@ const Select = ({
   onChange,
   helperText,
   variant,
+  classname,
   ...props
 }: Props & SelectProps): JSX.Element => {
   const [visited, setVisited] = useState<boolean>(!!value);
 
   return (
-    <S.Input>
+    <S.Input className={classname ?? ""}>
       <FormControl>
         <InputLabel required={required}>{label}</InputLabel>
         <SelectMUI

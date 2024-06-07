@@ -13,7 +13,7 @@ const Menu = (): JSX.Element => {
     id: string;
     text: string;
     onClick: (id: string) => void;
-    position: "top" | "bottom";
+    hasIcon?: boolean;
   }[] = useMemo(
     () => [
       {
@@ -23,7 +23,6 @@ const Menu = (): JSX.Element => {
           history.push("/entregas-avulsas");
           setSelected(id);
         },
-        position: "top",
       },
       {
         id: "entregas-multiplas",
@@ -32,7 +31,6 @@ const Menu = (): JSX.Element => {
           history.push("/entregas-multiplas");
           setSelected(id);
         },
-        position: "top",
       },
       {
         id: "bikers",
@@ -41,7 +39,6 @@ const Menu = (): JSX.Element => {
           history.push("/bikers");
           setSelected(id);
         },
-        position: "top",
       },
       {
         id: "clientes",
@@ -50,25 +47,6 @@ const Menu = (): JSX.Element => {
           history.push("/clientes");
           setSelected(id);
         },
-        position: "top",
-      },
-      {
-        id: "nav-item-1",
-        text: "Nav Item",
-        onClick: (id) => {
-          history.push("/nav-item-1");
-          setSelected(id);
-        },
-        position: "bottom",
-      },
-      {
-        id: "nav-item-2",
-        text: "Nav Item",
-        onClick: (id) => {
-          history.push("/nav-item-2");
-          setSelected(id);
-        },
-        position: "bottom",
       },
     ],
     [history]
@@ -76,34 +54,18 @@ const Menu = (): JSX.Element => {
 
   return (
     <S.Menu>
-      <S.Top>
-        {items
-          ?.filter((item) => item?.position === "top")
-          ?.map((item) => (
-            <S.Item
-              key={Math.random()}
-              onClick={() => item?.onClick(item?.id)}
-              $selected={item?.id === selected}
-            >
-              <MenuIcon />
-              <S.Label>{item?.text}</S.Label>
-            </S.Item>
-          ))}
-      </S.Top>
-      <S.Bottom>
-        {items
-          ?.filter((item) => item?.position === "bottom")
-          ?.map((item) => (
-            <S.Item
-              key={Math.random()}
-              onClick={() => item?.onClick(item?.id)}
-              $selected={item?.id === selected}
-            >
-              <MenuIcon />
-              <S.Label>{item?.text}</S.Label>
-            </S.Item>
-          ))}
-      </S.Bottom>
+      <S.Items>
+        {items?.map((item) => (
+          <S.Item
+            key={Math.random()}
+            onClick={() => item?.onClick(item?.id)}
+            $selected={item?.id === selected}
+          >
+            {item?.hasIcon && <MenuIcon />}
+            <S.Label>{item?.text}</S.Label>
+          </S.Item>
+        ))}
+      </S.Items>
     </S.Menu>
   );
 };
