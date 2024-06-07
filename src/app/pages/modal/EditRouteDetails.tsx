@@ -1,35 +1,111 @@
-import React, { memo, useMemo } from "react";
-import Modal from "../../components/Modal";
+import React, { Dispatch, SetStateAction, memo, useState } from "react";
+import TextField from "../../components/Inputs/textField";
+import Select from "../../components/Inputs/select";
+import { DeliveryStatus } from "../../utils/constants";
+import { Data } from "../../utils/types";
+import * as S from "./style";
 
 interface Props {
-  open: boolean;
-  onClose: () => void;
-  onSave: () => void;
+  data?: Data;
 }
 
-const EditRouteDetails = ({ open, onClose, onSave }: Props): JSX.Element => {
-  const buttons = useMemo(
-    () => [
-      {
-        text: "Confirmar edição",
-        onClick: onSave,
-        primary: true,
-      },
-      {
-        text: "Cancelar",
-        onClick: onClose,
-        inline: true,
-      },
-    ],
-    [onSave, onClose]
+interface PropsRD {
+  deliveryName?: string;
+  pickupAddress?: string;
+  deliveryAddress?: string;
+  setDeliveryName: Dispatch<SetStateAction<string>>;
+  setPickupAddress: Dispatch<SetStateAction<string>>;
+  setDeliveryAddress: Dispatch<SetStateAction<string>>;
+}
+
+const RouteDetails = ({
+  deliveryName,
+  pickupAddress,
+  deliveryAddress,
+  setDeliveryName,
+  setPickupAddress,
+  setDeliveryAddress,
+}: PropsRD): JSX.Element => (
+  <S.Container $padding="0 40px">
+    <S.Column $gap={16}>
+      <TextField
+        width="100%"
+        variant="filled"
+        id="delivery-name"
+        text="Destinatário"
+        value={deliveryName}
+        onChange={(e) => setDeliveryName(e.target.value)}
+      />
+      <TextField
+        width="100%"
+        id="pickup-address"
+        variant="filled"
+        text="Endereço de coleta"
+        value={pickupAddress}
+        onChange={(e) => setPickupAddress(e.target.value)}
+      />
+      <TextField
+        width="100%"
+        id="delivery-address"
+        variant="filled"
+        text="Endereço de entrega"
+        value={deliveryAddress}
+        onChange={(e) => setDeliveryAddress(e.target.value)}
+      />
+    </S.Column>
+  </S.Container>
+);
+
+const DeliveryDetails = (): JSX.Element => (
+  <>
+    <S.Container $padding="0 40px">
+      <S.Row $padding=" 48px 0 8px 0">
+        <S.Title>Alterar detalhes da entrega</S.Title>
+      </S.Row>
+    </S.Container>
+    <S.Divider $width="100%" />
+    <S.Container $padding="0 40px">
+      <S.Row $justifyContent="normal" $gap={48}>
+        <Select
+          classname="without-label"
+          variant="outlined"
+          label="Biker responsável"
+          options={[{ label: "Jacira Sousa", value: "Jacira Sousa" }]}
+        />
+        <Select
+          classname="without-label"
+          variant="outlined"
+          label="Status da entrega"
+          options={DeliveryStatus}
+        />
+      </S.Row>
+    </S.Container>
+  </>
+);
+
+const EditRouteDetails = ({ data }: Props): JSX.Element => {
+  const [deliveryName, setDeliveryName] = useState<string>(
+    data?.deliveryName ?? ""
+  );
+  const [pickupAddress, setPickupAddress] = useState<string>(
+    data?.pickupAddress ?? ""
+  );
+  const [deliveryAddress, setDeliveryAddress] = useState<string>(
+    data?.deliveryAddress ?? ""
   );
 
   return (
-    <Modal open={open} buttons={buttons} title="Alterar detalhes da rota">
-      <>
-        <div>Editar detalhes</div>
-      </>
-    </Modal>
+    <>
+      <RouteDetails
+        deliveryName={deliveryName}
+        pickupAddress={pickupAddress}
+        deliveryAddress={deliveryAddress}
+        setDeliveryName={setDeliveryName}
+        setPickupAddress={setPickupAddress}
+        setDeliveryAddress={setDeliveryAddress}
+      />
+      <DeliveryDetails />
+    </>
   );
 };
 

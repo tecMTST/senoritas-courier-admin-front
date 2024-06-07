@@ -29,47 +29,55 @@ export const Text = styled.label<{ $bold?: boolean; $title?: boolean }>`
   font-weight: ${(props) => (props?.$bold ? "700" : "400")};
   line-height: 21px;
   letter-spacing: -0.25px;
+  text-wrap: pretty;
 `;
 
 export const Column = styled.div<{
   $gap?: number;
+  $width?: string;
 }>`
   display: flex;
   flex-direction: column;
   gap: ${(props) => (props?.$gap ? `${props?.$gap}px` : "4px")};
+  width: ${(props) => props?.$width ?? "auto"};
 `;
 
 export const Row = styled.div<{
   $gap?: number;
   $width?: string;
+  $padding?: string;
+  $justifyContent?: string;
+  $alignItems?: string;
 }>`
   display: flex;
-  justify-content: space-between;
+  justify-content: ${(props) => props?.$justifyContent ?? "space-between"};
+  align-items: ${(props) => props?.$alignItems ?? "center"};
   gap: ${(props) => (props?.$gap ? `${props?.$gap}px` : "4px")};
   width: ${(props) => props?.$width ?? "auto"};
+  padding: ${(props) => props?.$padding ?? "0"};
 `;
 
-export const Header = styled.div`
+export const Container = styled.div<{
+  $padding?: string;
+}>`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 16px 0;
+  padding: ${(props) => props?.$padding ?? "0"};
 
-  button {
+  button:not(.has-icon) {
     padding: 8px 0;
+
   }
 `;
 
-export const Divider = styled.div`
+export const Divider = styled.div<{
+  $margin?: string;
+  $width?: string;
+}>`
   min-height: 1px;
   background: #c3ccd6;
   display: flex;
-  margin: 16px 0px;
-`;
-
-export const Subdivider = styled.div`
-  min-height: 1px;
-  background: #c3ccd6;
-  display: flex;
-  width: 50%;
+  margin: ${(props) => props?.$margin ?? "16px 0"};
+  width: ${(props) => props?.$width ?? "auto"};
 `;

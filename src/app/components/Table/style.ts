@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Table = styled.div<{ $boldHead?: boolean; $borderHead?: boolean }>`
-  & .MuiPagination-ul {
+  .MuiPagination-ul {
     margin-top: 20px;
     margin-bottom: 48px;
     justify-content: center;
@@ -16,7 +16,7 @@ export const Table = styled.div<{ $boldHead?: boolean; $borderHead?: boolean }>`
       line-height: 21px;
     }
 
-    & .Mui-selected {
+    .Mui-selected {
       color: #00b596;
       background: #e6f4ec;
       text-align: center;
@@ -28,19 +28,19 @@ export const Table = styled.div<{ $boldHead?: boolean; $borderHead?: boolean }>`
     }
   }
 
-  & .MuiPaper-root {
+  .MuiPaper-root {
     background-color: transparent;
     border-radius: 0;
     box-shadow: none;
 
-    & .MuiTableCell-head {
+    .MuiTableCell-head {
       border-bottom: ${(props) =>
         props?.$borderHead ? "1px solid #C3CCD6" : "none"};
       padding: 24px 16px;
       font-weight: ${(props) => (props?.$boldHead ? "700 !important" : "400")};
     }
 
-    & .MuiTableCell-root {
+    .MuiTableCell-root {
       color: #505862;
       font-family: "Public Sans";
       font-size: 14px;

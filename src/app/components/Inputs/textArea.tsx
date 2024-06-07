@@ -7,6 +7,7 @@ interface Props {
   text: string;
   error?: boolean;
   maxLength?: number;
+  width?: string;
 }
 
 const TextArea = ({
@@ -16,12 +17,17 @@ const TextArea = ({
   maxLength,
   required,
   value,
+  width,
   ...props
 }: Props & Omit<TextFieldProps, "variant">): JSX.Element => {
   const [visited, setVisited] = useState<boolean>(!!value);
 
   return (
-    <S.Input onBlur={() => setVisited(true)} onFocus={() => setVisited(false)}>
+    <S.Input
+      onBlur={() => setVisited(true)}
+      onFocus={() => setVisited(false)}
+      $width={width}
+    >
       <S.Label>{text}</S.Label>
       <TextFieldMUI
         multiline

@@ -1,17 +1,9 @@
-import React, { memo, useCallback, useState } from "react";
+import React, { memo, useCallback, useMemo, useState } from "react";
 import ViewRouteDetails from "./ViewRouteDetails";
 import EditRouteDetails from "./EditRouteDetails";
 import EditPayment from "./EditPayment";
-
-interface Data {
-  order: string;
-  client: string;
-  total: string;
-  status: string;
-  orderDate: string;
-  deliveryDate: string;
-  biker: string;
-}
+import { Data } from "../../utils/types";
+import Modal from "../../components/Modal";
 
 interface Props {
   data?: Data;
@@ -35,24 +27,69 @@ const RouteDetails = ({ data, open, onClose, onSave }: Props): JSX.Element => {
     setSelected("view");
   }, []);
 
-  switch (selected) {
-    case "editDetails":
-      return <EditRouteDetails open={open} onClose={close} onSave={save} />;
+  const render = useMemo(() => {
+    switch (selected) {
+      case "editDetails":
+        return <EditRouteDetails data={data} />;
 
-    case "editPayment":
-      return <EditPayment open={open} onClose={close} onSave={save} />;
+      case "editPayment":
+        return <EditPayment data={data} />;
 
-    default:
-      return (
-        <ViewRouteDetails
-          data={data}
-          open={open}
-          onClose={close}
-          onSave={onSave}
-          onEdit={setSelected}
-        />
-      );
-  }
+      default:
+        return <ViewRouteDetails data={data} onEdit={setSelected} />;
+    }
+  }, [data, selected]);
+
+  const title = useMemo(() => {
+    switch (selected) {
+      case "editDetails":
+        return "Alterar detalhes da rota";
+
+      case "editPayment":
+        return "Alterar detalhes do pagamento";
+
+      default:
+        return "Rota";
+    }
+  }, [selected]);
+
+  const subtitle = useMemo(() => {
+    if (selected === "view")
+      return `Entregas avulsas / Pedido ${data?.order ?? ""}`;
+    return "";
+  }, [data?.order, selected]);
+
+  const buttons = useMemo(
+    () => [
+      {
+        text: selected === "view" ? "Salvar e sair" : "Confirmar edição",
+        onClick: selected === "view" ? onSave : save,
+        primary: true,
+      },
+
+      {
+        text: "Cancelar",
+        onClick: close,
+        inline: true,
+      },
+    ],
+    [close, onSave, save, selected]
+  );
+
+  return (
+    <Modal
+      open={open}
+      onClose={onClose}
+      buttons={buttons}
+      title={title}
+      subtitle={subtitle}
+      width="60vw"
+      isFull={selected !== "view"}
+      padding={selected !== "view" ? "0" : "0 40px"}
+    >
+      {render}
+    </Modal>
+  );
 };
 
 export default memo(RouteDetails);

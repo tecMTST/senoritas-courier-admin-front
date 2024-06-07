@@ -13,7 +13,7 @@ interface Props {
   required?: boolean;
   helperText?: string;
   error?: boolean;
-  options: { label: string; value: string | number }[];
+  options: { icon?: JSX.Element; label: string; value: string | number }[];
   variant: "filled" | "standard" | "outlined";
   classname?: string;
 }
@@ -34,6 +34,9 @@ const Select = ({
 
   return (
     <S.Input className={classname ?? ""}>
+      {classname === "without-label" && (
+        <S.Label $variant="standard">{label}</S.Label>
+      )}
       <FormControl>
         <InputLabel required={required}>{label}</InputLabel>
         <SelectMUI
@@ -51,6 +54,7 @@ const Select = ({
           </MenuItem>
           {options.map((item) => (
             <MenuItem key={Math.random()} value={item.value}>
+              {item?.icon && item?.icon}
               {item.label}
             </MenuItem>
           ))}

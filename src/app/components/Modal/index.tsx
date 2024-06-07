@@ -22,6 +22,9 @@ interface Props {
     inline?: boolean;
   }[];
   color?: string;
+  width?: string;
+  padding?: string;
+  isFull?: boolean;
 }
 
 const Modal = ({
@@ -31,15 +34,20 @@ const Modal = ({
   onClose,
   buttons,
   color,
+  width,
+  padding,
+  isFull,
   ...props
 }: Props & DialogProps): JSX.Element => (
   <Dialog {...props}>
     {!subtitle ? (
       <S.Title>
         <DialogTitle>{title}</DialogTitle>
-        <IconButton onClick={onClose}>
-          <Close />
-        </IconButton>
+        {!isFull && (
+          <IconButton onClick={onClose}>
+            <Close />
+          </IconButton>
+        )}
       </S.Title>
     ) : (
       <S.Header>
@@ -47,13 +55,16 @@ const Modal = ({
           <label className="title">{title}</label>
           <label className="subtitle">{subtitle}</label>
         </div>
+
         <IconButton onClick={onClose}>
           <Close color="#272727" />
         </IconButton>
       </S.Header>
     )}
-    <S.Divider />
-    <S.Modal>{children}</S.Modal>
+    <S.Divider $full={isFull} />
+    <S.Modal $width={width} $padding={padding}>
+      {children}
+    </S.Modal>
     {buttons && buttons?.length > 0 && (
       <S.Footer>
         <DialogActions>

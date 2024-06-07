@@ -1,12 +1,16 @@
 import styled from "styled-components";
 
-export const Input = styled.div<{ $error?: boolean }>`
-  width: 25%;
+export const Input = styled.div<{
+  $variant?: string;
+  $width?: string;
+  $error?: boolean;
+}>`
+  width: ${(props) => props?.$width ?? "25%"};
 
-  & .MuiFormControl-root {
+  .MuiFormControl-root {
     width: 100%;
 
-    & label {
+    label {
       font-family: "Public Sans";
       font-size: 14px;
       font-style: normal;
@@ -15,36 +19,49 @@ export const Input = styled.div<{ $error?: boolean }>`
       color: #272727;
     }
 
-    & label:not(.MuiInputLabel-shrink) {
+    label:not(.MuiInputLabel-shrink) {
       transform: translate(24px, 10px) scale(1);
     }
 
-    & .MuiInputLabel-shrink {
+    .MuiInputLabel-shrink {
       padding: 1px;
       background: #ffffff;
     }
 
-    & .MuiInputBase-multiline {
+    .MuiInputBase-multiline {
       display: flex;
       padding: 10px 14px;
       align-items: center;
       gap: 8px;
       flex: 1 0 0;
 
-      & .MuiInputBase-inputMultiline {
+      .MuiInputBase-inputMultiline {
         font-size: 16px !important;
         line-height: 24px !important;
         padding: 0 !important;
       }
 
-      & fieldset {
+      fieldset {
         border-radius: 8px !important;
       }
     }
 
-    & .MuiInputBase-root {
-      & .MuiInputBase-input {
-        padding: 12px 16px;
+    .MuiFilledInput-root {
+      background: none;
+    }
+
+    ::before {
+      border-bottom: 1px solid #8e918e !important;
+    }
+
+    ::after {
+      border-bottom: 2px solid #8e918e;
+    }
+
+    .MuiInputBase-root {
+      .MuiInputBase-input {
+        padding: ${(props) =>
+          props?.$variant === "filled" ? "0 8px 8px 16px" : "12px 16px;"};
         font-family: "Public Sans";
         color: #272727;
         font-size: 14px;
@@ -53,11 +70,11 @@ export const Input = styled.div<{ $error?: boolean }>`
         line-height: 21px;
       }
 
-      & .MuiSelect-select {
+      .MuiSelect-select {
         padding: 10px 14px;
       }
 
-      & fieldset {
+      fieldset {
         border-radius: 24px;
         border: 1px solid #c3ccd6;
       }
@@ -66,6 +83,12 @@ export const Input = styled.div<{ $error?: boolean }>`
 
   .MuiSvgIcon-root {
     color: #272727;
+  }
+
+  &.without-label {
+    .MuiFormLabel-root {
+      display: none;
+    }
   }
 `;
 
@@ -83,13 +106,15 @@ export const HelperText = styled.label`
   margin-left: 0;
 `;
 
-export const Label = styled.label`
-  color: #272727;
+export const Label = styled.label<{ $variant?: string }>`
+  color: ${(props) => (props?.$variant === "filled" ? "#404944" : "#272727")};
   font-family: "Public Sans";
-  font-size: 14px;
+  font-size: ${(props) => (props?.$variant === "filled" ? "13px" : "14px")};
   font-style: normal;
   font-weight: 400;
   line-height: 21px;
   margin: 0;
   margin-bottom: 4px;
+  padding: ${(props) =>
+    props?.$variant === "filled" ? "8px 0px 0 16px" : "0"};
 `;

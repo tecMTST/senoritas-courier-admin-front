@@ -7,6 +7,8 @@ interface Props {
   text: string;
   error?: boolean;
   maxLength?: number;
+  width?: string;
+  variant?: "filled" | "outlined" | "standard";
 }
 
 const TextField = ({
@@ -16,16 +18,23 @@ const TextField = ({
   maxLength,
   required,
   value,
+  width,
+  variant,
   ...props
 }: Props & Omit<TextFieldProps, "variant">): JSX.Element => {
   const [visited, setVisited] = useState<boolean>(!!value);
 
   return (
-    <S.Input onBlur={() => setVisited(true)} onFocus={() => setVisited(false)}>
-      <S.Label>{text}</S.Label>
+    <S.Input
+      onBlur={() => setVisited(true)}
+      onFocus={() => setVisited(false)}
+      $variant={variant ?? "outlined"}
+      $width={width}
+    >
+      <S.Label $variant={variant ?? "outlined"}>{text}</S.Label>
       <TextFieldMUI
         id={id}
-        variant="outlined"
+        variant={variant ?? "outlined"}
         inputProps={{ maxLength }}
         error={visited && (error || (required && !value))}
         value={value}
