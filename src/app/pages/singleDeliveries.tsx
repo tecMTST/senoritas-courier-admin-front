@@ -17,6 +17,7 @@ const SingleDeliveries = (): JSX.Element => {
   const [selected, setSelected] = useState<FormTDO>();
 
   useEffect(() => {
+    console.log(MockRows);
     const response: FormTDO[] = MockRows?.map((item) => ({
       ...item,
       clientName: item?.client?.name,
@@ -73,7 +74,7 @@ const SingleDeliveries = (): JSX.Element => {
     () =>
       [
         {
-          id: "order",
+          id: "code",
           label: "Código",
         },
         {
@@ -82,7 +83,7 @@ const SingleDeliveries = (): JSX.Element => {
           orderBy: true,
         },
         {
-          id: "client",
+          id: "clientName",
           label: "Cliente",
           orderBy: true,
         },
