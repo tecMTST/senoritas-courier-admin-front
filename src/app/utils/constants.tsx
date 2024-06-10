@@ -33,3 +33,18 @@ export const DeliveryStatus = [
     value: "Suspenso",
   },
 ];
+
+export const AvailabilityType = [
+  "Integral",
+  "Todos os dias",
+  "Manhã",
+  "Tarde",
+  "Noite",
+  "Seg",
+  "Ter",
+  "Qua",
+  "Qui",
+  "Sex",
+  "Sab",
+  "Dom",
+];

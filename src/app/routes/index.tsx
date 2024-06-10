@@ -1,9 +1,9 @@
 import React from "react";
 import { withRouter, Route, Switch } from "react-router-dom";
-import SingleDeliveries from "../pages/singleDeliveries";
-import MultipleDeliveries from "../pages/multipleDeliveries";
-import Bikers from "../pages/bikers";
-import Clients from "../pages/clients";
+import Bikers from "../pages/Bikers/bikers";
+import Clients from "../pages/Clients/clients";
+import MultipleDeliveries from "../pages/MultipleDeliveries/multipleDeliveries";
+import SingleDeliveries from "../pages/SigleDeliveries";
 
 const Routes = (): JSX.Element => (
   <Switch>

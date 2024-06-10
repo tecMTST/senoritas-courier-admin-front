@@ -90,3 +90,22 @@ export interface FormTDO extends Form {
     payments?: Payment[];
   };
 }
+
+export interface Biker {
+  _id?: string;
+  photo?: string;
+  name?: string;
+  phone?: string;
+  description?: string;
+  address?: string;
+  neighborhood?: string;
+  addressNumber?: number;
+  complement?: string;
+  city?: string;
+  state?: string;
+  zipCode?: string;
+  comments?: string;
+  localization?: string;
+  status?: string;
+  availability?: string;
+}

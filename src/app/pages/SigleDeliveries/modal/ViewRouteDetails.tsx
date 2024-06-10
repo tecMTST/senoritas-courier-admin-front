@@ -1,7 +1,7 @@
 import React, { memo } from "react";
-import Button from "../../components/Button";
-import Edit from "../../assets/icons/Edit";
-import { FormTDO } from "../../utils/types";
+import Button from "../../../components/Button";
+import Edit from "../../../assets/icons/Edit";
+import { FormTDO } from "../../../utils/types";
 import * as S from "./style";
 
 interface Props {

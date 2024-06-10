@@ -1,12 +1,12 @@
 import React, { Dispatch, SetStateAction, memo, useState } from "react";
-import { FormTDO, Payment } from "../../utils/types";
-import TextField from "../../components/Inputs/textField";
-import * as S from "./style";
-import Select from "../../components/Inputs/select";
-import Button from "../../components/Button";
-import Plus from "../../assets/icons/Plus";
-import Close from "../../assets/icons/Close";
 import { InputAdornment } from "@mui/material";
+import { FormTDO, Payment } from "../../../utils/types";
+import TextField from "../../../components/Inputs/textField";
+import Select from "../../../components/Inputs/select";
+import Button from "../../../components/Button";
+import Plus from "../../../assets/icons/Plus";
+import Close from "../../../assets/icons/Close";
+import * as S from "./style";
 
 interface Props {
   data?: FormTDO;

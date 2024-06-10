@@ -1,13 +1,13 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
-import Search from "../assets/icons/Search";
-import Button from "../components/Button";
-import Select from "../components/Inputs/select";
-import Table, { Column } from "../components/Table";
-import { FormTDO } from "../utils/types";
-import { OrderStatus } from "../utils/constants";
-import { MockOptionsBikers, MockRows } from "../utils/mocks";
+import Search from "../../assets/icons/Search";
+import Button from "../../components/Button";
+import Select from "../../components/Inputs/select";
+import Table, { Column } from "../../components/Table";
+import { FormTDO } from "../../utils/types";
+import { OrderStatus } from "../../utils/constants";
+import { MockOptionsBikers, MockSingleDelivery } from "../../utils/mocks";
 import RouteDetails from "./modal/RouteDetails";
-import * as S from "./style";
+import * as S from "../style";
 
 const SingleDeliveries = (): JSX.Element => {
   const [status, setStatus] = useState("");
@@ -17,8 +17,8 @@ const SingleDeliveries = (): JSX.Element => {
   const [selected, setSelected] = useState<FormTDO>();
 
   useEffect(() => {
-    console.log(MockRows);
-    const response: FormTDO[] = MockRows?.map((item) => ({
+    console.log(MockSingleDelivery);
+    const response: FormTDO[] = MockSingleDelivery?.map((item) => ({
       ...item,
       clientName: item?.client?.name,
       deliveryDate: item?.order?.deliveryDate,

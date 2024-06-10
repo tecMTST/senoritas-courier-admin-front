@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction, memo, useState } from "react";
-import TextField from "../../components/Inputs/textField";
-import Select from "../../components/Inputs/select";
-import { DeliveryStatus } from "../../utils/constants";
-import { FormTDO } from "../../utils/types";
+import TextField from "../../../components/Inputs/textField";
+import Select from "../../../components/Inputs/select";
+import { DeliveryStatus } from "../../../utils/constants";
+import { FormTDO } from "../../../utils/types";
 import * as S from "./style";
 
 interface Props {

@@ -11,7 +11,7 @@ export const Footer = styled.div`
   width: 100%;
   align-items: center;
   border-top: 2px solid #c3ccd6;
-  z-index: 1;
+  z-index: 10;
 `;
 
 export const Label = styled.label`

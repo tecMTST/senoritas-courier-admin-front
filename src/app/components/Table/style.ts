@@ -80,7 +80,7 @@ export const Empty = styled.p`
 
 export const Action = styled.button<{ $type?: string }>`
   padding: 8px 16px;
-  color: ${(props) => (props?.$type ? "#00B596" : "#8593A3")};
+  color: ${(props) => (props?.$type === "primary" ? "#00B596" : "#8593A3")};
   background: none;
   border: none;
   cursor: pointer;
@@ -92,4 +92,13 @@ export const Action = styled.button<{ $type?: string }>`
   line-height: 20px;
   letter-spacing: -0.5px;
   text-decoration-line: underline;
+
+  div {
+    display: flex;
+    align-items: center;
+  }
+
+  svg {
+    margin-left: 4px;
+  }
 `;

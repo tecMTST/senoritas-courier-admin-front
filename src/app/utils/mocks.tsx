@@ -1,6 +1,6 @@
-import { Form } from "./types";
+import { Biker, Form } from "./types";
 
-export const MockRows: Form[] = [
+export const MockSingleDelivery: Form[] = [
   {
     code: "#202403001",
     client: {
@@ -74,3 +74,34 @@ export const MockOptionsBikers = [
   { label: "Biker D", value: "Biker D" },
   { label: "Biker E", value: "Biker E" },
 ];
+
+export const MockBikers: Biker[] = [
+  {
+    _id: "1",
+    name: "Jacira Sousa",
+    zipCode: "030646-020",
+    status: "Ativo",
+    availability: "Integral",
+  },
+  {
+    _id: "2",
+    name: "Helenice",
+    zipCode: "030646-020",
+    status: "Ativo",
+    availability: "Integral",
+  },
+  {
+    _id: "3",
+    name: "Marite",
+    zipCode: "030646-020",
+    status: "Ativo",
+    availability: "Seg-Qui",
+  },
+  {
+    _id: "4",
+    name: "Joaquim",
+    zipCode: "030646-020",
+    status: "Ativo",
+    availability: "Qua-Sab",
+  },
+];  

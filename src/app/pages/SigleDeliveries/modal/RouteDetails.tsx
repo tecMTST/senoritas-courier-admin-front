@@ -1,9 +1,9 @@
 import React, { memo, useCallback, useMemo, useState } from "react";
+import { FormTDO } from "../../../utils/types";
+import Modal from "../../../components/Modal";
 import ViewRouteDetails from "./ViewRouteDetails";
 import EditRouteDetails from "./EditRouteDetails";
 import EditPayment from "./EditPayment";
-import { FormTDO } from "../../utils/types";
-import Modal from "../../components/Modal";
 
 interface Props {
   data?: FormTDO;

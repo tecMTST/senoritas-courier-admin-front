@@ -35,6 +35,7 @@ interface Props {
   actions?: {
     type: string;
     text: string;
+    icon?: JSX.Element;
     onClick: (item: { [x: string]: string | number }) => void;
   }[];
 }
@@ -107,13 +108,16 @@ const Table = ({
                         actions?.length
                       )
                         return (
-                          <TableCell key={Math.random()}>
+                          <TableCell key={Math.random()} className="action">
                             {actions?.map((action) => (
                               <S.Action
                                 onClick={() => action.onClick(row)}
-                                $type={action.type}
+                                $type={action?.type}
                               >
-                                {action.text}
+                                <div>
+                                  {action.text}
+                                  {action?.icon}
+                                </div>
                               </S.Action>
                             ))}
                           </TableCell>
