@@ -6,6 +6,7 @@ import Select from "../../components/Inputs/select";
 import Button from "../../components/Button";
 import Plus from "../../assets/icons/Plus";
 import Close from "../../assets/icons/Close";
+import { InputAdornment } from "@mui/material";
 
 interface Props {
   data?: Data;
@@ -32,16 +33,24 @@ const EditPayments = ({
   <S.Container $padding="0 40px">
     <S.Column $gap={16}>
       <TextField
+        className="mask"
         id="total"
         text="Subtotal do item"
         value={total}
         onChange={(e) => setTotal(e.target.value)}
+        InputProps={{
+          startAdornment: <InputAdornment position="start">R$</InputAdornment>,
+        }}
       />
       <TextField
+        className="mask"
         id="aditional"
         text="Adicionais"
         value={aditional}
         onChange={(e) => setAditional(e.target.value)}
+        InputProps={{
+          startAdornment: <InputAdornment position="start">R$</InputAdornment>,
+        }}
       />
     </S.Column>
   </S.Container>
@@ -70,7 +79,16 @@ const AddPayments = ({ payments, setPayments }: PropsAdd): JSX.Element => (
           label="Novo pagamento"
           options={[{ label: "Pix", value: "Pix" }]}
         />
-        <TextField id="value" text="Valor adicional" />
+        <TextField
+          id="value"
+          text="Valor adicional"
+          className="mask"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">R$</InputAdornment>
+            ),
+          }}
+        />
         <Button
           inline
           text="Excluir"

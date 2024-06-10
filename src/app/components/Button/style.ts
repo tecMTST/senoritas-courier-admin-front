@@ -21,6 +21,7 @@ export const Button = styled.button<{ $primary?: boolean; $inline?: boolean }>`
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
+    width: max-content;
   }
 `;
 

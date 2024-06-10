@@ -10,6 +10,23 @@ export const Input = styled.div<{
   .MuiFormControl-root {
     width: 100%;
 
+    &.mask {
+      .MuiInputBase-input {
+        border-left: 1px solid #a8b5c2;
+        margin: 4px 0;
+        padding: 6px 16px !important;
+      }
+
+      .MuiTypography-root {
+        color: #8593a3;
+        font-family: "Public Sans";
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 21px;
+      }
+    }
+
     label {
       font-family: "Public Sans";
       font-size: 14px;
