@@ -9,6 +9,8 @@ export const OrderStatus = [
   { label: "Cancelado", value: "Cancelado" },
 ];
 
+export const PaymentType = ["Pix", "Depósito", "Transferência"];
+
 export const DeliveryStatus = [
   {
     icon: <Dot color="#FFFF" />,

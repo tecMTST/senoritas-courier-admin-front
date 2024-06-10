@@ -1,9 +1,9 @@
-import React, { memo, useCallback, useMemo, useState } from "react";
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 import Search from "../assets/icons/Search";
 import Button from "../components/Button";
 import Select from "../components/Inputs/select";
 import Table, { Column } from "../components/Table";
-import { Data } from "../utils/types";
+import { FormTDO } from "../utils/types";
 import { OrderStatus } from "../utils/constants";
 import { MockOptionsBikers, MockRows } from "../utils/mocks";
 import RouteDetails from "./modal/RouteDetails";
@@ -12,9 +12,23 @@ import * as S from "./style";
 const SingleDeliveries = (): JSX.Element => {
   const [status, setStatus] = useState("");
   const [biker, setBiker] = useState("");
-  const [data, setData] = useState(MockRows);
+  const [data, setData] = useState<FormTDO[]>();
   const [openModal, setOpenModal] = useState(false);
-  const [selected, setSelected] = useState<Data>();
+  const [selected, setSelected] = useState<FormTDO>();
+
+  useEffect(() => {
+    const response: FormTDO[] = MockRows?.map((item) => ({
+      ...item,
+      clientName: item?.client?.name,
+      deliveryDate: item?.order?.deliveryDate,
+      total: item?.estimatedAmounts?.totalPrice,
+      payment: {
+        status: "Aprovado",
+        payments: [{ type: "PIX", value: "R$ 65,43" }],
+      },
+    }));
+    setData(response);
+  }, []);
 
   const onChangeStatus = useCallback(
     ({ target: { value } }: { target: { value: unknown } }) =>
@@ -30,7 +44,7 @@ const SingleDeliveries = (): JSX.Element => {
 
   const onChangeBikerData = useCallback(
     (value: string, index: number) => {
-      const newData = [...data];
+      const newData = [...(data ?? [])];
       newData[index].biker = value;
       setData(newData);
     },
@@ -40,7 +54,7 @@ const SingleDeliveries = (): JSX.Element => {
   const onRouteDetails = useCallback(
     (item: { [x: string]: string | number }) => {
       setOpenModal(true);
-      setSelected(item as unknown as Data);
+      setSelected(item);
     },
     []
   );
@@ -63,7 +77,7 @@ const SingleDeliveries = (): JSX.Element => {
           label: "Código",
         },
         {
-          id: "orderDate",
+          id: "createdAt",
           label: "Pedido",
           orderBy: true,
         },
@@ -150,7 +164,7 @@ const SingleDeliveries = (): JSX.Element => {
         boldHead
         borderHead
         columns={columns}
-        rows={data}
+        rows={data as { [x: string]: string | number }[]}
         actions={actions}
       />
 

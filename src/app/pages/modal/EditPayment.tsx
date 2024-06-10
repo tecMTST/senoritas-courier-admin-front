@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, memo, useState } from "react";
-import { Data, Payment } from "../../utils/types";
+import { FormTDO, Payment } from "../../utils/types";
 import TextField from "../../components/Inputs/textField";
 import * as S from "./style";
 import Select from "../../components/Inputs/select";
@@ -9,14 +9,14 @@ import Close from "../../assets/icons/Close";
 import { InputAdornment } from "@mui/material";
 
 interface Props {
-  data?: Data;
+  data?: FormTDO;
 }
 
 interface PropsEdit {
-  total?: string;
-  aditional?: string;
-  setTotal: Dispatch<SetStateAction<string>>;
-  setAditional: Dispatch<SetStateAction<string>>;
+  total?: number;
+  aditional?: number;
+  setTotal: Dispatch<SetStateAction<number>>;
+  setAditional: Dispatch<SetStateAction<number>>;
 }
 
 interface PropsAdd {
@@ -37,7 +37,7 @@ const EditPayments = ({
         id="total"
         text="Subtotal do item"
         value={total}
-        onChange={(e) => setTotal(e.target.value)}
+        onChange={(e) => setTotal(Number(e.target.value))}
         InputProps={{
           startAdornment: <InputAdornment position="start">R$</InputAdornment>,
         }}
@@ -47,7 +47,7 @@ const EditPayments = ({
         id="aditional"
         text="Adicionais"
         value={aditional}
-        onChange={(e) => setAditional(e.target.value)}
+        onChange={(e) => setAditional(Number(e.target.value))}
         InputProps={{
           startAdornment: <InputAdornment position="start">R$</InputAdornment>,
         }}
@@ -101,9 +101,13 @@ const AddPayments = ({ payments, setPayments }: PropsAdd): JSX.Element => (
 );
 
 const EditPayment = ({ data }: Props): JSX.Element => {
-  const [total, setTotal] = useState<string>(data?.total ?? "");
-  const [aditional, setAditional] = useState<string>(data?.pickupAddress ?? "");
-  const [payments, setPayments] = useState<Payment[]>(data?.payments ?? []);
+  const [total, setTotal] = useState<number>(data?.total ?? 0);
+  const [aditional, setAditional] = useState<number>(
+    (data?.total ?? 0) - (data?.estimatedAmounts?.mainPrice ?? 0) ?? 0
+  );
+  const [payments, setPayments] = useState<Payment[]>(
+    data?.payment?.payments ?? []
+  );
 
   return (
     <>

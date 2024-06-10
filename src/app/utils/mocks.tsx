@@ -1,39 +1,69 @@
-export const MockRows = [
+import { Form } from "./types";
+
+export const MockRows: Form[] = [
   {
-    order: "#202403001",
-    client: "Bruna Queiroz",
-    total: "R$ 65,43",
+    code: "#202403001",
+    client: {
+      name: "Bruna Queiroz",
+    },
+    estimatedAmounts: {
+      totalPrice: 65.43,
+      mainPrice: 50.43,
+    },
+    order: {
+      deliveryDate: "18/03/2023",
+    },
     status: "Solicitado",
-    orderDate: "13/03/2023",
-    deliveryDate: "18/03/2023",
     biker: "Biker A",
+    createdAt: "13/03/2023",
   },
   {
-    order: "#202403002",
-    client: "Luísa Santos",
-    total: "R$ 65,43",
+    code: "#202403002",
+    client: {
+      name: "Luísa Santos",
+    },
+    estimatedAmounts: {
+      totalPrice: 65.43,
+      mainPrice: 50.43,
+    },
+    order: {
+      deliveryDate: "18/03/2023",
+    },
     status: "Atribuído",
-    orderDate: "13/03/2023",
-    deliveryDate: "18/03/2023",
     biker: "Biker B",
+    createdAt: "13/03/2023",
   },
   {
-    order: "#202403003",
-    client: "Carla Pereira",
-    total: "R$ 65,43",
+    code: "#202403003",
+    client: {
+      name: "Carla Pereira",
+    },
+    estimatedAmounts: {
+      totalPrice: 65.43,
+      mainPrice: 50.43,
+    },
+    order: {
+      deliveryDate: "18/03/2023",
+    },
     status: "Suspenso",
-    orderDate: "13/03/2023",
-    deliveryDate: "18/03/2023",
     biker: "Biker C",
+    createdAt: "13/03/2023",
   },
   {
-    order: "#202403004",
-    client: "Janna Ortega",
-    total: "R$ 65,43",
+    code: "#202403004",
+    client: {
+      name: "Janna Ortega",
+    },
+    estimatedAmounts: {
+      totalPrice: 65.43,
+      mainPrice: 50.43,
+    },
+    order: {
+      deliveryDate: "18/03/2023",
+    },
     status: "Em andamento",
-    orderDate: "13/03/2023",
-    deliveryDate: "18/03/2023",
     biker: "Biker D",
+    createdAt: "13/03/2023",
   },
 ];
 

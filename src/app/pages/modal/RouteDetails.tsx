@@ -2,11 +2,11 @@ import React, { memo, useCallback, useMemo, useState } from "react";
 import ViewRouteDetails from "./ViewRouteDetails";
 import EditRouteDetails from "./EditRouteDetails";
 import EditPayment from "./EditPayment";
-import { Data } from "../../utils/types";
+import { FormTDO } from "../../utils/types";
 import Modal from "../../components/Modal";
 
 interface Props {
-  data?: Data;
+  data?: FormTDO;
   open: boolean;
   onClose: () => void;
   onSave: () => void;

@@ -2,11 +2,11 @@ import React, { Dispatch, SetStateAction, memo, useState } from "react";
 import TextField from "../../components/Inputs/textField";
 import Select from "../../components/Inputs/select";
 import { DeliveryStatus } from "../../utils/constants";
-import { Data } from "../../utils/types";
+import { FormTDO } from "../../utils/types";
 import * as S from "./style";
 
 interface Props {
-  data?: Data;
+  data?: FormTDO;
 }
 
 interface PropsRD {
@@ -85,13 +85,13 @@ const DeliveryDetails = (): JSX.Element => (
 
 const EditRouteDetails = ({ data }: Props): JSX.Element => {
   const [deliveryName, setDeliveryName] = useState<string>(
-    data?.deliveryName ?? ""
-  );
-  const [pickupAddress, setPickupAddress] = useState<string>(
-    data?.pickupAddress ?? ""
+    data?.delivery?.name ?? ""
   );
   const [deliveryAddress, setDeliveryAddress] = useState<string>(
-    data?.deliveryAddress ?? ""
+    data?.delivery?.address ?? ""
+  );
+  const [pickupAddress, setPickupAddress] = useState<string>(
+    data?.pickup?.address ?? ""
   );
 
   return (
