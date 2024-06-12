@@ -96,7 +96,7 @@ export const MockBikers: Biker[] = [
     status: "Ativo",
     availability: "Qua-Sab",
   },
-];  
+];
 
 export const MockOrders = [
   {
@@ -110,5 +110,32 @@ export const MockOrders = [
     clientName: "Gilberto Santos",
     total: 200.0,
     deliveryDate: "20/03/2023",
+  },
+];
+
+export const MockClients = [
+  {
+    client: "Empresa A",
+    contact: "Laura Rodrigues",
+    address: "Rua Joerg Bruder, 181  -  Vila Sao Francisco",
+    zipCode: "04710-200",
+  },
+  {
+    client: "Empresa B",
+    contact: "Carlos Oliveira",
+    address: "Rua São Ticiano, 88  -  Vila Formosa",
+    zipCode: "03360-070",
+  },
+  {
+    client: "Empresa C",
+    contact: "Natália Vaz",
+    address: "Rua Doutor Alvino Lima, 8  -  Paraíso",
+    zipCode: "04103-040",
+  },
+  {
+    client: "Empresa D",
+    contact: "Luisa Santos",
+    address: "Rua Curuzu, 156 - Lapa",
+    zipCode: "05084-020",
   },
 ];

@@ -2,12 +2,11 @@ import styled from "styled-components";
 
 export const Card = styled.div`
   display: flex;
-  width: 296px;
-  padding: 32px 24px 48px 24px;
+  padding: 24px;
   flex-direction: column;
-  border-radius: 16px;
   background: #ffffff;
-  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  border: 1px solid #c3ccd6;
 `;
 
 export const Image = styled.div`
@@ -21,31 +20,32 @@ export const Image = styled.div`
 `;
 
 export const Title = styled.label`
-  color: #00b596;
-  font-family: Inter;
-  font-size: 20px;
+  color: #505862;
+  font-family: "Public Sans";
+  font-size: 18px;
   font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  padding: 12px 0;
+  font-weight: 700;
+  line-height: 27px;
+  letter-spacing: -0.25px;
+  margin-bottom: 24px;
 `;
 
 export const Description = styled.label`
-  color: #717d96;
-  font-family: Inter;
+  color: #6a7682;
+  font-family: "Public Sans";
   font-size: 14px;
   font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  padding: 2px 0;
+  font-weight: 400;
+  line-height: 21px;
+  letter-spacing: -0.25px;
 `;
 
-export const Status = styled.label`
-  color: #717d96;
-  font-family: Inter;
-  font-size: 14px;
+export const Value = styled.label`
+  color: #00b596;
+  font-family: "Public Sans";
+  font-size: 20px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   line-height: normal;
-  padding: 2px 0;
+  letter-spacing: -0.25px;
 `;
