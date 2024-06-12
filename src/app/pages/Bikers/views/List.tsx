@@ -16,9 +16,14 @@ const List = ({ onClick, setId }: PropsBikers): JSX.Element => {
   const [selected, setSelected] = useState<Biker>();
   const [data, setData] = useState<Biker[]>();
 
-  useEffect(() => {
-    setData(MockBikers);
+  const getData = useCallback(() => {
+    const response = MockBikers;
+    setData(response);
   }, []);
+
+  useEffect(() => {
+    getData();
+  }, [getData]);
 
   const onEdit = useCallback((item: { [x: string]: string | number }) => {
     setOpenModal(true);

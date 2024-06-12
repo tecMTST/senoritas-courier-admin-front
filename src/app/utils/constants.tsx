@@ -34,6 +34,24 @@ export const DeliveryStatus = [
   },
 ];
 
+export const OptionsStatus = [
+  {
+    icon: <Dot color="#10A74F" />,
+    label: "Aprovado",
+    value: "Aprovado",
+  },
+  {
+    icon: <Dot color="#FFA800" />,
+    label: "Em aprovação",
+    value: "Em aprovação",
+  },
+  {
+    icon: <Dot color="#D10F0F" />,
+    label: "Cancelado",
+    value: "Cancelado",
+  },
+];
+
 export const AvailabilityType = [
   "Integral",
   "Todos os dias",

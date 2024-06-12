@@ -132,7 +132,7 @@ const Table = ({
                           <TableCell key={Math.random()}>
                             <Select
                               variant="outlined"
-                              label="Biker"
+                              label=""
                               options={column?.values}
                               value={value}
                               onChange={(e) => {

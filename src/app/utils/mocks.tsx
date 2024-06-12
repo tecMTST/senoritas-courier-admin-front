@@ -104,12 +104,16 @@ export const MockOrders = [
     clientName: "Laura Rodrigues",
     total: 100.0,
     deliveryDate: "16/03/2023",
+    status: "Aprovado",
+    biker: "Jacira Sousa",
   },
   {
     itinerary: "Roteiro #6",
     clientName: "Gilberto Santos",
     total: 200.0,
     deliveryDate: "20/03/2023",
+    status: "Aprovado",
+    biker: "Joaquim",
   },
 ];
 
@@ -137,5 +141,35 @@ export const MockClients = [
     contact: "Luisa Santos",
     address: "Rua Curuzu, 156 - Lapa",
     zipCode: "05084-020",
+  },
+];
+
+export const MockMultiple = [
+  {
+    order: "#M202403001",
+    client: "Empresa A",
+    contact: "Laura Rodrigues",
+    status: "Aprovado",
+    deliveryDate: "16/03/2024",
+    total: "R$ 320,00",
+    payment: "Pago",
+  },
+  {
+    order: "#M202403001",
+    client: "Empresa B",
+    contact: "Carlos Oliveira",
+    status: "Em aprovação",
+    deliveryDate: "22/03/2024",
+    total: "R$ 200,05",
+    payment: "Em aberto",
+  },
+  {
+    order: "#M202403001",
+    client: "Empresa C",
+    contact: "Natália Vaz",
+    status: "Aprovado",
+    deliveryDate: "10/04/2024",
+    total: "R$ 88,90",
+    payment: "Em aberto",
   },
 ];
