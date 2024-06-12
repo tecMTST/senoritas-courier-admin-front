@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter, Route, Switch } from "react-router-dom";
-import Bikers from "../pages/Bikers/bikers";
+import Bikers from "../pages/Bikers";
 import Clients from "../pages/Clients/clients";
 import MultipleDeliveries from "../pages/MultipleDeliveries/multipleDeliveries";
 import SingleDeliveries from "../pages/SigleDeliveries";

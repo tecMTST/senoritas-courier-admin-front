@@ -3,6 +3,7 @@ import TextField from "../../../components/Inputs/textField";
 import Select from "../../../components/Inputs/select";
 import { DeliveryStatus } from "../../../utils/constants";
 import { FormTDO } from "../../../utils/types";
+import { MockBikers } from "../../../utils/mocks";
 import * as S from "./style";
 
 interface Props {
@@ -70,7 +71,10 @@ const DeliveryDetails = (): JSX.Element => (
           classname="without-label"
           variant="outlined"
           label="Biker responsável"
-          options={[{ label: "Jacira Sousa", value: "Jacira Sousa" }]}
+          options={MockBikers.map((item) => ({
+            value: item?.name ?? "",
+            label: item?.name ?? "",
+          }))}
         />
         <Select
           classname="without-label"

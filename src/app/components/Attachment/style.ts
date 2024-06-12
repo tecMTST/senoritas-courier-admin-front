@@ -2,14 +2,30 @@ import styled from "styled-components";
 
 export const Attachment = styled.button`
   cursor: pointer;
+  background: transparent;
+  border-radius: 50%;
+  border: 1px dashed #00b596;
+  padding: 8px;
+  width: 108px;
+  height: 96px;
   gap: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: transparent;
-  border-radius: 8px;
-  border: 1px dashed #00b596;
-  padding: 8px;
+
+  &.with-value {
+    padding: 0;
+    border: none;
+    width: 96px;
+    height: 96px;
+  }
+
+  img {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
 
   input {
     display: none;

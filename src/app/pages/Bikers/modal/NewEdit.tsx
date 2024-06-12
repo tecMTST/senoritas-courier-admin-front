@@ -1,9 +1,10 @@
-import React, { memo, useEffect, useMemo, useState } from "react";
-import { Biker } from "../../utils/types";
-import Modal from "../../components/Modal";
-import TextField from "../../components/Inputs/textField";
-import TextArea from "../../components/Inputs/textArea";
-import * as S from "../style";
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { Biker } from "../../../utils/types";
+import Modal from "../../../components/Modal";
+import TextField from "../../../components/Inputs/textField";
+import TextArea from "../../../components/Inputs/textArea";
+import * as S from "../../style";
+import Attachment from "../../../components/Attachment";
 
 interface Props {
   open: boolean;
@@ -12,12 +13,25 @@ interface Props {
   onSave: () => void;
 }
 
-const ModalNewEdit = ({ open, onClose, data, onSave }: Props): JSX.Element => {
+const NewEdit = ({ open, onClose, data, onSave }: Props): JSX.Element => {
   const [_data, _setData] = useState(data);
 
   useEffect(() => {
-    if (data?._id !== _data?._id) _setData(data);
+    if (data?.name !== _data?.name) _setData(data);
   }, [_data, data]);
+
+  const onChangePhoto = useCallback(
+    (e: any) => {
+      const file = e.target.files[0];
+      _setData({
+        ..._data,
+        photo:
+          file?.name ??
+          "https://public-static-cms-270de735.s3.us-east-1.amazonaws.com/large_Senoritas_Courrier_01052024_046_8b6c7769b9.jpg",
+      });
+    },
+    [_data]
+  );
 
   const buttons = useMemo(
     () => [
@@ -44,7 +58,8 @@ const ModalNewEdit = ({ open, onClose, data, onSave }: Props): JSX.Element => {
       width="60vw"
     >
       <S.Text>Informações gerais</S.Text>
-      <S.Row>
+      <S.Row className="center">
+        <Attachment value={_data?.photo} onChange={onChangePhoto} />
         <TextField
           width="100%"
           id="name"
@@ -166,4 +181,4 @@ const ModalNewEdit = ({ open, onClose, data, onSave }: Props): JSX.Element => {
   );
 };
 
-export default memo(ModalNewEdit);
+export default memo(NewEdit);

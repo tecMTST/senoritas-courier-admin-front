@@ -103,7 +103,9 @@ const AddPayments = ({ payments, setPayments }: PropsAdd): JSX.Element => (
 const EditPayment = ({ data }: Props): JSX.Element => {
   const [total, setTotal] = useState<number>(data?.total ?? 0);
   const [aditional, setAditional] = useState<number>(
-    (data?.total ?? 0) - (data?.estimatedAmounts?.mainPrice ?? 0) ?? 0
+    parseFloat(
+      ((data?.total ?? 0) - (data?.estimatedAmounts?.mainPrice ?? 0)).toFixed(2)
+    )
   );
   const [payments, setPayments] = useState<Payment[]>(
     data?.payment?.payments ?? []

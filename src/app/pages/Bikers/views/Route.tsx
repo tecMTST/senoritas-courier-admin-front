@@ -1,34 +1,36 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
-import Search from "../../assets/icons/Search";
-import Button from "../../components/Button";
-import Select from "../../components/Inputs/select";
-import Table, { Column } from "../../components/Table";
-import { FormTDO } from "../../utils/types";
-import { OrderStatus } from "../../utils/constants";
-import { MockBikers, MockSingleDelivery } from "../../utils/mocks";
-import RouteDetails from "./modal/RouteDetails";
-import * as S from "../style";
+import Button from "../../../components/Button";
+import Search from "../../../assets/icons/Search";
+import Select from "../../../components/Inputs/select";
+import Table, { Column } from "../../../components/Table";
+import { OrderStatus } from "../../../utils/constants";
+import { FormTDO } from "../../../utils/types";
+import { MockSingleDelivery } from "../../../utils/mocks";
+import RouteDetails from "../../SigleDeliveries/modal/RouteDetails";
+import ArrowLeft from "../../../assets/icons/ArrowLeft";
+import * as S from "../../style";
+import { PropsBikers } from "..";
 
-const SingleDeliveries = (): JSX.Element => {
+const Route = ({ onClick, biker, order, setId }: PropsBikers): JSX.Element => {
   const [status, setStatus] = useState("");
-  const [biker, setBiker] = useState("");
+  const [orderBy, setOrderBy] = useState("");
   const [data, setData] = useState<FormTDO[]>();
-  const [openModal, setOpenModal] = useState(false);
   const [selected, setSelected] = useState<FormTDO>();
+  const [openModal, setOpenModal] = useState(false);
 
-  useEffect(() => {
-    const response: FormTDO[] = MockSingleDelivery?.map((item) => ({
+  const getData = useCallback(() => {
+    const response: FormTDO[] = MockSingleDelivery.map((item) => ({
       ...item,
       clientName: item?.client?.name,
       deliveryDate: item?.order?.deliveryDate,
       total: item?.estimatedAmounts?.totalPrice,
-      payment: {
-        status: "Aprovado",
-        payments: [{ type: "PIX", value: "R$ 65,43" }],
-      },
     }));
     setData(response);
   }, []);
+
+  useEffect(() => {
+    getData();
+  }, [getData]);
 
   const onChangeStatus = useCallback(
     ({ target: { value } }: { target: { value: unknown } }) =>
@@ -36,28 +38,16 @@ const SingleDeliveries = (): JSX.Element => {
     []
   );
 
-  const onChangeBiker = useCallback(
+  const onChangeOrderBy = useCallback(
     ({ target: { value } }: { target: { value: unknown } }) =>
-      setBiker(value as string),
+      setOrderBy(value as string),
     []
   );
 
-  const onChangeBikerData = useCallback(
-    (value: string, index: number) => {
-      const newData = [...(data ?? [])];
-      newData[index].biker = value;
-      setData(newData);
-    },
-    [data]
-  );
-
-  const onRouteDetails = useCallback(
-    (item: { [x: string]: string | number }) => {
-      setOpenModal(true);
-      setSelected(item);
-    },
-    []
-  );
+  const onRouteDetails = useCallback((item: FormTDO) => {
+    setSelected(item);
+    setOpenModal(true);
+  }, []);
 
   const onClose = useCallback(() => {
     setOpenModal(false);
@@ -73,28 +63,18 @@ const SingleDeliveries = (): JSX.Element => {
     () =>
       [
         {
-          id: "code",
-          label: "Código",
-        },
-        {
-          id: "createdAt",
-          label: "Pedido",
+          id: "route",
+          label: "Rota",
           orderBy: true,
         },
         {
           id: "clientName",
-          label: "Cliente",
+          label: "Destinatário",
           orderBy: true,
-        },
-        {
-          id: "total",
-          label: "Total",
-          orderBy: true,
-          format: (value) => `R$ ${value}`,
         },
         {
           id: "status",
-          label: "Status",
+          label: "Status da entrega",
           orderBy: true,
         },
         {
@@ -106,26 +86,20 @@ const SingleDeliveries = (): JSX.Element => {
           id: "biker",
           label: "Biker",
           orderBy: true,
-          type: "select",
-          values: MockBikers.map((item) => ({
-            value: item?.name ?? "",
-            label: item?.name ?? "",
-          })),
-          onChange: onChangeBikerData,
         },
         {
           id: "actions",
           type: "action",
         },
       ] as Column[],
-    [onChangeBikerData]
+    []
   );
 
   const actions = useMemo(
     () => [
       {
         type: "primary",
-        text: "Ver detalhes da rota",
+        text: "Ver detalhes de rota",
         onClick: onRouteDetails,
       },
     ],
@@ -134,10 +108,23 @@ const SingleDeliveries = (): JSX.Element => {
 
   return (
     <>
+      <Button
+        inline
+        startIcon
+        text="Voltar"
+        icon={<ArrowLeft />}
+        onClick={() => {
+          if (setId) setId(undefined);
+          onClick("order");
+        }}
+      />
       <S.Row className="space-between">
-        <S.Title>Entregas avulsas</S.Title>
+        <S.Path>
+          <label className="first">{`Biker / ${biker} / `}</label>
+          <label className="last">{order}</label>
+        </S.Path>
         <Button
-          text="Buscar por pedido ou cliente"
+          text="Buscar"
           icon={<Search color="#00B596" />}
           onClick={() => alert("buscar")}
         />
@@ -145,20 +132,22 @@ const SingleDeliveries = (): JSX.Element => {
       <S.Row>
         <Select
           variant="outlined"
-          label="Status"
+          label="Status da entrega"
           options={OrderStatus}
           value={status}
           onChange={onChangeStatus}
         />
         <Select
           variant="outlined"
-          label="Biker"
-          options={MockBikers.map((item) => ({
-            value: item?.name ?? "",
-            label: item?.name ?? "",
-          }))}
-          value={biker}
-          onChange={onChangeBiker}
+          label="Ordenar por"
+          options={columns
+            .filter((item) => item?.id !== "actions")
+            .map((item) => ({
+              label: item?.label ?? "",
+              value: item?.id ?? "",
+            }))}
+          value={orderBy}
+          onChange={onChangeOrderBy}
         />
       </S.Row>
 
@@ -180,4 +169,4 @@ const SingleDeliveries = (): JSX.Element => {
   );
 };
 
-export default memo(SingleDeliveries);
+export default memo(Route);

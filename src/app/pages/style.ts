@@ -21,6 +21,30 @@ export const Row = styled.div`
   &.margin-bottom-40 {
     margin-bottom: 40px;
   }
+
+  &.center {
+    align-items: center;
+  }
+`;
+
+export const Path = styled.div`
+  display: flex;
+  gap: 4px;
+  font-family: "Public Sans";
+  font-size: 20px;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.25px;
+
+  .first {
+    color: #717d96;
+    font-weight: 400;
+  }
+
+  .last {
+    color: #00b596;
+    font-weight: 600;
+  }
 `;
 
 export const Title = styled.label`

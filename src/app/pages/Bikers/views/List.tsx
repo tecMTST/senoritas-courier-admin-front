@@ -1,19 +1,20 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
-import { MockBikers } from "../../utils/mocks";
-import { Biker } from "../../utils/types";
-import Button from "../../components/Button";
-import Table, { Column } from "../../components/Table";
-import EditInline from "../../assets/icons/EditInline";
-import Search from "../../assets/icons/Search";
-import Plus from "../../assets/icons/Plus";
-import BikerImg from "../../assets/images/biker.svg";
-import ModalNewEdit from "./modalNewEdit";
-import * as S from "../style";
+import { MockBikers } from "../../../utils/mocks";
+import { Biker } from "../../../utils/types";
+import Button from "../../../components/Button";
+import Table, { Column } from "../../../components/Table";
+import EditInline from "../../../assets/icons/EditInline";
+import Search from "../../../assets/icons/Search";
+import Plus from "../../../assets/icons/Plus";
+import BikerImg from "../../../assets/images/biker.svg";
+import NewEdit from "../modal/NewEdit";
+import { PropsBikers } from "..";
+import * as S from "../../style";
 
-const Bikers = (): JSX.Element => {
-  const [data, setData] = useState<Biker[]>();
+const List = ({ onClick, setId }: PropsBikers): JSX.Element => {
   const [openModal, setOpenModal] = useState(false);
   const [selected, setSelected] = useState<Biker>();
+  const [data, setData] = useState<Biker[]>();
 
   useEffect(() => {
     setData(MockBikers);
@@ -69,7 +70,11 @@ const Bikers = (): JSX.Element => {
       {
         type: "primary",
         text: "Ver pedidos da biker",
-        onClick: () => alert("ver pedidos"),
+        onClick: (item: { [x: string]: string | number }) => {
+          if (setId) setId(item?.name as string);
+          onClick("order");
+        },
+        hide: true,
       },
       {
         type: "secondary",
@@ -78,7 +83,7 @@ const Bikers = (): JSX.Element => {
         onClick: onEdit,
       },
     ],
-    [onEdit]
+    [onClick, onEdit, setId]
   );
 
   return (
@@ -100,13 +105,21 @@ const Bikers = (): JSX.Element => {
         </S.Container>
       ) : (
         <>
-          <S.Row className="space-between">
+          <S.Row className="space-between baseline">
             <S.Title>Bikers</S.Title>
-            <Button
-              text="Buscar por biker"
-              icon={<Search color="#00B596" />}
-              onClick={() => alert("buscar")}
-            />
+            <S.Row className="end">
+              <Button
+                primary
+                text="Cadastrar biker"
+                icon={<Plus />}
+                onClick={() => setOpenModal(true)}
+              />
+              <Button
+                text="Buscar por biker"
+                icon={<Search color="#00B596" />}
+                onClick={() => alert("buscar")}
+              />
+            </S.Row>
           </S.Row>
 
           <Table
@@ -119,7 +132,7 @@ const Bikers = (): JSX.Element => {
         </>
       )}
 
-      <ModalNewEdit
+      <NewEdit
         data={selected}
         onSave={onSave}
         onClose={onClose}
@@ -129,4 +142,4 @@ const Bikers = (): JSX.Element => {
   );
 };
 
-export default memo(Bikers);
+export default memo(List);

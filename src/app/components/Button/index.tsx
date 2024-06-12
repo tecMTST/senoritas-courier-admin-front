@@ -7,6 +7,7 @@ interface Props {
   disabled?: boolean;
   primary?: boolean;
   inline?: boolean;
+  startIcon?: boolean;
 }
 
 const Button = ({
@@ -15,6 +16,7 @@ const Button = ({
   disabled,
   primary,
   inline,
+  startIcon,
   ...props
 }: HTMLAttributes<any> & Props): JSX.Element => (
   <S.Button
@@ -24,8 +26,9 @@ const Button = ({
     $inline={inline}
     {...props}
   >
+    {icon && startIcon && <S.Icon>{icon}</S.Icon>}
     <span>{text}</span>
-    {icon && <S.Icon>{icon}</S.Icon>}
+    {icon && !startIcon && <S.Icon>{icon}</S.Icon>}
   </S.Button>
 );
 

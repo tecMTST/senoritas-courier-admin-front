@@ -47,10 +47,6 @@ export const Table = styled.div<{ $boldHead?: boolean; $borderHead?: boolean }>`
       font-style: normal;
       font-weight: 400;
       line-height: 21px;
-
-      .width-auto {
-        width: auto;
-      }
     }
   }
 `;
@@ -68,7 +64,8 @@ export const HeadCel = styled.div`
   }
 `;
 
-export const Empty = styled.p`
+export const Empty = styled.tr`
+  display: flex;
   padding: 16px;
   color: #505862;
   font-family: "Public Sans";

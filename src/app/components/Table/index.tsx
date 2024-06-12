@@ -33,6 +33,7 @@ interface Props {
   columns: Column[];
   rows?: { [x: string]: string | number }[];
   actions?: {
+    hide?: boolean;
     type: string;
     text: string;
     icon?: JSX.Element;
@@ -109,17 +110,20 @@ const Table = ({
                       )
                         return (
                           <TableCell key={Math.random()} className="action">
-                            {actions?.map((action) => (
-                              <S.Action
-                                onClick={() => action.onClick(row)}
-                                $type={action?.type}
-                              >
-                                <div>
-                                  {action.text}
-                                  {action?.icon}
-                                </div>
-                              </S.Action>
-                            ))}
+                            {actions
+                              ?.filter((action) => !action?.hide)
+                              ?.map((action) => (
+                                <S.Action
+                                  key={Math.random()}
+                                  onClick={() => action.onClick(row)}
+                                  $type={action?.type}
+                                >
+                                  <div>
+                                    {action.text}
+                                    {action?.icon}
+                                  </div>
+                                </S.Action>
+                              ))}
                           </TableCell>
                         );
 

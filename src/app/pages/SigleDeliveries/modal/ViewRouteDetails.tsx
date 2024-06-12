@@ -40,7 +40,7 @@ const OrderDetails = ({ data }: { data?: FormTDO }): JSX.Element => (
         <S.Text $bold $title>
           Total
         </S.Text>
-        <S.Text>{data?.total ?? " - "}</S.Text>
+        <S.Text>R$ {data?.total ?? " - "}</S.Text>
       </S.Column>
       <S.Column>
         <S.Text $bold $title>
@@ -135,7 +135,12 @@ const PaymentDetails = ({ data, onEdit }: Props) => (
           <S.Row>
             <S.Text>Adicionais</S.Text>
             <S.Text>
-              R$ {(data?.total ?? 0) - (data?.estimatedAmounts?.mainPrice ?? 0)}
+              R${" "}
+              {parseFloat(
+                (
+                  (data?.total ?? 0) - (data?.estimatedAmounts?.mainPrice ?? 0)
+                ).toFixed(2)
+              )}
             </S.Text>
           </S.Row>
         </S.Column>

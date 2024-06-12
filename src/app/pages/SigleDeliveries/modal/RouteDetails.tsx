@@ -55,9 +55,9 @@ const RouteDetails = ({ data, open, onClose, onSave }: Props): JSX.Element => {
 
   const subtitle = useMemo(() => {
     if (selected === "view")
-      return `Entregas avulsas / Pedido ${data?.order ?? ""}`;
+      return `Entregas avulsas / Pedido ${data?.code ?? ""}`;
     return "";
-  }, [data?.order, selected]);
+  }, [data?.code, selected]);
 
   const buttons = useMemo(
     () => [
