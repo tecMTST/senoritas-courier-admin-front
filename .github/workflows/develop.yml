@@ -13,7 +13,7 @@ jobs:
           ref: develop
 
       - name: '[INSTALL] | Install Dependencies'
-        run: npm ci
+        run: npm install
         shell: bash
 
       - name: '[BUILD] | Build'
