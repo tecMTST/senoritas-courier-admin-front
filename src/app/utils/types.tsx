@@ -19,7 +19,7 @@ export interface Pickup {
   addressNumber?: number;
   complement?: string;
   zipCode?: string;
-  geolocation?: string;
+  coordinates?: { latitude: string; longitude: string };
   comments?: string;
 }
 
@@ -34,7 +34,7 @@ export interface Delivery {
   state?: string;
   zipCode?: string;
   comments?: string;
-  geolocation?: string;
+  geolocation?: { latitude: string; longitude: string };
   return?: boolean;
 }
 
@@ -48,6 +48,8 @@ export interface Order {
   waitingTime?: number;
   distance?: number;
   comments?: string;
+  accepted?: boolean;
+  acceptedClient?: boolean;
   status?: string; // TODO
 }
 
