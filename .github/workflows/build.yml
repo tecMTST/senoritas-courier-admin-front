@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: '[BUILD] | Install Dependencies'
         run: npm install
@@ -17,4 +17,3 @@ jobs:
       - name: '[BUILD] | Build'
         run: npm run build
         shell: bash
-

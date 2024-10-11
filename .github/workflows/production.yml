@@ -1,4 +1,4 @@
-name: Publish Main
+name: '[ Production ] Publish'
 
 on:
   - workflow_dispatch
@@ -8,11 +8,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: main
 
-      - name: '[INSTALL] | Install Dependencies'
+      - name: '[BUILD] | Install Dependencies'
         run: npm install
         shell: bash
 
@@ -21,11 +21,11 @@ jobs:
         shell: bash
 
       - name: '[ACTION] | Clone publish s3 action'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: heronlabs/publish-s3-action
-          ref: 5.0.0
-          token: ${{ secrets.AUTHOR_PERSONAL_ACCESS }}
+          ref: 8.0.0
+          token: ${{ secrets.PAT }}
           path: ./publish-s3-action
 
       - name: '[ACTION] | Run publish s3 action'
@@ -36,23 +36,23 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_ROLE_TO_ASSUME: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          AWS_ROLE_TO_ASSUME: ${{ secrets.PRD_AWS_ROLE_TO_ASSUME }}
           AWS_ROLE_DURATION_SECONDS: 3600
 
       - name: '[ACTION] | Clone publish Cloudfront action'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: heronlabs/publish-cloudfront-action
-          ref: 1.0.0
-          token: ${{ secrets.AUTHOR_PERSONAL_ACCESS}}
+          ref: 3.0.0
+          token: ${{ secrets.PAT}}
           path: ./publish-cloudfront-action
 
       - name: '[ACTION] | Run publish Cloudfront action'
         uses: './publish-cloudfront-action/application/github'
         with:
-          DISTRIBUTION_ID: EIU0HEHX6R3JD
+          DISTRIBUTION_ID: E3PI9AHVQFTZWK
           AWS_REGION: ${{ secrets.AWS_REGION}}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-          AWS_ROLE_TO_ASSUME: ${{ secrets.AWS_ROLE_TO_ASSUME}}
+          AWS_ROLE_TO_ASSUME: ${{ secrets.PRD_AWS_ROLE_TO_ASSUME}}
           AWS_ROLE_DURATION_SECONDS: 3600
