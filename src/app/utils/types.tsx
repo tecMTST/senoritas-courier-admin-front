@@ -1,44 +1,89 @@
-export interface Payment {
-  type?: string;
-  value?: string;
-} // TODO
+interface DeliveryTime {
+  id: string;
+  period: string;
+  description: string;
+  isSpecial: boolean;
+  isExtraordinary: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
 
-export interface Client {
+interface ProductType {
+  id: string;
+  name: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface Address {
+  address?: string;
+  number?: string;
+  neighborhood?: string;
+  city?: string;
+  state?: string;
+  zipCode?: string;
+  complement?: string;
+  coordinates?: {
+    latitude?: number;
+    longitude?: number;
+  };
+}
+
+interface Contact {
+  name?: string;
+  phone?: string;
+}
+
+export interface Biker {
+  id?: string;
+  name?: string;
+  email?: string;
+  password?: string;
+  address?: Address;
+  contact?: Contact;
+  maxChargeableDistance?: number;
+  maxDistance?: number;
+  maxVolume?: number;
+  maxWeight?: number;
+
+  zipCode?: string;
+  phone?: string;
+}
+
+export interface BikerTDO extends Biker {
+  zipCode?: string;
+  phone?: string;
+}
+
+export interface ClientRequest {
+  id?: string;
   name?: string;
   email?: string;
   phone?: string;
 }
 
-export interface Pickup {
+export interface ClientResponse {
+  id?: string;
+  name?: string;
+  email?: string;
+  contact?: Contact;
+}
+
+export interface DeliveryRequest extends Address {
   name?: string;
   phone?: string;
-  address?: string;
-  city?: string;
-  state?: string;
-  neighborhood?: string;
   addressNumber?: number;
-  complement?: string;
-  zipCode?: string;
-  coordinates?: { latitude: string; longitude: string };
   comments?: string;
 }
 
-export interface Delivery {
-  name?: string;
-  phone?: string;
-  address?: string;
-  neighborhood?: string;
-  addressNumber?: number;
-  complement?: string;
-  city?: string;
-  state?: string;
-  zipCode?: string;
-  comments?: string;
-  geolocation?: { latitude: string; longitude: string };
-  return?: boolean;
+export interface DeliveryResponse {
+  deliveryNumber?: number;
+  address?: Address;
+  contact?: Contact;
 }
 
-export interface Order {
+export interface OrderRequest {
   deliveryDate?: string;
   deliveryTime?: string;
   productType?: string;
@@ -46,11 +91,37 @@ export interface Order {
   rainyDelivery?: boolean;
   concierge?: boolean;
   waitingTime?: number;
-  distance?: number;
   comments?: string;
-  accepted?: boolean;
-  acceptedClient?: boolean;
-  status?: string; // TODO
+  distance?: number;
+  approved?: boolean | null;
+}
+
+export interface OrderResponse {
+  id?: string;
+  deliveryTime?: DeliveryTime;
+  productType?: ProductType;
+  distance?: number;
+  weight?: number;
+  rainyDelivery?: boolean;
+  concierge?: boolean;
+  waitingTime?: number;
+  comments?: string;
+  price?: number | null;
+  approvedClient?: boolean;
+  approved?: boolean;
+}
+
+export interface PickupRequest extends Address {
+  name?: string;
+  phone?: string;
+  addressNumber?: number;
+  comments?: string;
+}
+
+export interface PickupResponse {
+  pickupNumber?: number;
+  address?: Address;
+  contact?: Contact;
 }
 
 export interface EstimatedAmounts {
@@ -67,48 +138,56 @@ export interface EstimatedAmounts {
   totalPrice?: number;
 }
 
-export interface Form {
-  _id?: string;
-  code?: string; // TODO
-  route?: string; // TODO
-  status?: string; // TODO
-  biker?: string; // TODO
-  createdAt?: string; // TODO
-  client?: Client;
-  pickup?: Pickup;
-  delivery?: Delivery;
-  order?: Order;
-  estimatedAmounts?: EstimatedAmounts;
+export interface Itinerary {
+  id?: string;
+  status?: string | null;
+  biker?: Biker;
+  client?: ClientResponse;
+  delivery?: DeliveryResponse;
+  pickup?: PickupResponse;
+  order?: OrderResponse;
 }
 
-export interface FormTDO extends Form {
-  /* table */
-  clientName?: string;
-  total?: number;
-  deliveryDate?: string;
+export interface ItineraryTDO extends Itinerary {
+  bikerId?: string;
+  bikerName?: string;
+}
 
-  /* payment details */
-  payment?: {
-    status?: string;
-    payments?: Payment[];
+
+export interface OrderTDO {
+  id?: string;
+  client?: ClientRequest;
+  pickup?: PickupRequest[];
+  delivery?: DeliveryRequest[];
+  order?: OrderRequest;
+  returnToOrigin?: boolean;
+  totalPrice?: number;
+  breakdown?: {
+    basePrice: number;
+    returnToOriginCharge: number;
+    totalPrice: number;
+    waitingTimeCharge: number;
   };
 }
 
-export interface Biker {
-  _id?: string;
-  photo?: string;
-  name?: string;
-  phone?: string;
-  description?: string;
-  address?: string;
-  neighborhood?: string;
-  addressNumber?: number;
-  complement?: string;
-  city?: string;
-  state?: string;
-  zipCode?: string;
-  comments?: string;
-  localization?: string;
-  status?: string;
-  availability?: string;
+export interface OrderFormTDO extends OrderTDO {
+  clientName?: string;
+  clientContact?: string;
+  deliveryDate?: string;
+  orderStatus?: string;
+  itineraryStatus?: string;
+  itineraryId?: string;
+  bikerId?: string;
+  bikerName?: string;
+}
+
+export interface ItineraryFormTDO extends ItineraryTDO {
+  clientName?: string;
+  clientContact?: string;
+  itineraryId?: string;
+  bikerId?: string;
+  bikerName?: string;
+  totalPrice?: number;
+  orderStatus?: string;
+  deliveryDate?: string;
 }

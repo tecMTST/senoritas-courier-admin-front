@@ -1,5 +1,19 @@
 import styled from "styled-components";
 
+export const Login = styled.div`
+  position: absolute;
+  max-height: calc(100vh - 98px - 198px);
+  overflow: auto;
+  width: 100%;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+`;
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -88,4 +102,18 @@ export const Text = styled.label`
   font-weight: 600;
   line-height: normal;
   letter-spacing: -0.25px;
+`;
+
+export const ErrorText = styled.label`
+  color: #c30010;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.66;
+  letter-spacing: 0.03333em;
+  text-align: left;
+  margin-top: 3px;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
 `;

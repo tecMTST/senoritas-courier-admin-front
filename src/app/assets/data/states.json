@@ -1,0 +1,218 @@
+[
+    {
+        "_id": "BR-AC",
+        "name": {
+            "en": "Acre",
+            "pt": "Acre"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-AL",
+        "name": {
+            "en": "Alagoas",
+            "pt": "Alagoas"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-AM",
+        "name": {
+            "en": "Amazonas",
+            "pt": "Amazonas"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-AP",
+        "name": {
+            "en": "Amapa",
+            "pt": "Amapá"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-BA",
+        "name": {
+            "en": "Bahia",
+            "pt": "Bahia"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-CE",
+        "name": {
+            "en": "Ceara",
+            "pt": "Ceará"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-DF",
+        "name": {
+            "en": "Federal District",
+            "pt": "Distrito Federal"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-ES",
+        "name": {
+            "en": "Espirito Santo",
+            "pt": "Espírito Santo"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-GO",
+        "name": {
+            "en": "Goias",
+            "pt": "Goiás"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-MA",
+        "name": {
+            "en": "Maranhao",
+            "pt": "Maranhão"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-MG",
+        "name": {
+            "en": "Minas Gerais",
+            "pt": "Minas Gerais"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-MS",
+        "name": {
+            "en": "Mato Grosso do Sul",
+            "pt": "Mato Grosso do Sul"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-MT",
+        "name": {
+            "en": "Mato Grosso",
+            "pt": "Mato Grosso"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-PA",
+        "name": {
+            "en": "Para",
+            "pt": "Pará"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-PB",
+        "name": {
+            "en": "Paraiba",
+            "pt": "Paraíba"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-PE",
+        "name": {
+            "en": "Pernambuco",
+            "pt": "Pernambuco"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-PI",
+        "name": {
+            "en": "Piaui",
+            "pt": "Piauí"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-PR",
+        "name": {
+            "en": "Parana",
+            "pt": "Paraná"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-RJ",
+        "name": {
+            "en": "Rio de Janeiro",
+            "pt": "Rio de Janeiro"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-RN",
+        "name": {
+            "en": "Rio Grande do Norte",
+            "pt": "Rio Grande do Norte"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-RO",
+        "name": {
+            "en": "Rondonia",
+            "pt": "Rondônia"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-RR",
+        "name": {
+            "en": "Roraima",
+            "pt": "Roraima"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-RS",
+        "name": {
+            "en": "Rio Grande do Sul",
+            "pt": "Rio Grande do Sul"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-SC",
+        "name": {
+            "en": "Santa Catarina",
+            "pt": "Santa Catarina"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-SE",
+        "name": {
+            "en": "Sergipe",
+            "pt": "Sergipe"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-SP",
+        "name": {
+            "en": "Sao Paulo",
+            "pt": "São Paulo"
+        },
+        "country": "BR"
+    },
+    {
+        "_id": "BR-TO",
+        "name": {
+            "en": "Tocantins",
+            "pt": "Tocantins"
+        },
+        "country": "BR"
+    }
+]

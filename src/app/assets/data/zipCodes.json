@@ -1,0 +1,178 @@
+[
+    {
+        "posistion": "Centro",
+        "region": "CENTRO",
+        "districts": [
+            "Sé",
+            "Santa Efigênia",
+            "República",
+            "Centro"
+        ],
+        "min": "01000000",
+        "max": "01099999"
+    },
+    {
+        "posistion": "Centro",
+        "region": "BOM RETIRO",
+        "districts": [
+            "Barra Funda",
+            "Bom Retiro",
+            "Luz",
+            "Ponte Pequena"
+        ],
+        "min": "01100000",
+        "max": "01199999"
+    },
+    {
+        "posistion": "Centro",
+        "region": "VILA BUARQUE",
+        "districts": [
+            "Santa Cecíli",
+            "Pacaembú",
+            "Sumaré",
+            "Higienópolis",
+            "Consolação"
+        ],
+        "min": "01200000",
+        "max": "01299999"
+    },
+    {
+        "posistion": "Centro",
+        "region": "CONSOLAÇÃO",
+        "districts": [
+            "Consolação",
+            "Bela Vista"
+        ],
+        "min": "01300000",
+        "max": "01399999"
+    },
+    {
+        "posistion": "Centro",
+        "region": "JARDINS",
+        "districts": [
+            "Cerqueira César",
+            "Jardim Paulista",
+            "Jardim América",
+            "Jardim Europa"
+        ],
+        "min": "01400000",
+        "max": "01499999"
+    },
+    {
+        "posistion": "Centro",
+        "region": "LIBERDADE",
+        "districts": [
+            "Liberdade",
+            "Cambuci",
+            "Aclimação",
+            "Vila Monumento",
+            "Jardimda Glória"
+        ],
+        "min": "01500000",
+        "max": "01599999"
+    },
+    {
+        "posistion": "Centro",
+        "region": "CENTRO HISTÓRICO",
+        "districts": [
+            "Flor da Cantareira "
+        ],
+        "min": "02290000",
+        "max": "02290999"
+    },
+    {
+        "position": "Zona Oeste",
+        "region": "LAPA E PERDIZES",
+        "districts": [
+            "Lapa",
+            "Perdizes",
+            "Água Branca",
+            "Alto da Lapa",
+            "Vila Anastácia",
+            "Pompéia",
+            "Vila Romana"
+        ],
+        "min": "05000000",
+        "max": "05099999"
+    },
+    {
+        "position": "Zona Oeste",
+        "region": "LEOPOLDINA",
+        "districts": [
+            "Vila Leopoldina",
+            "Ceasa",
+            "Vila Hamburguesa"
+        ],
+        "min": "05300000",
+        "max": "05319999"
+    },
+    {
+        "position": "Zona Oeste",
+        "region": "PINHEIROS",
+        "districts": [
+            "Pinheiros",
+            "Vila Madalena",
+            "Alto de Pinheiros"
+        ],
+        "min": "05400000",
+        "max": "05499999"
+    },
+    {
+        "position": "Zona Sul",
+        "region": "MOEMA E V. MARIANA",
+        "districts": [
+            "Vila Mariana",
+            "Vila Clementino",
+            "Paraíso",
+            "Indianópolis",
+            "Moema",
+            "Planalto Paulista",
+            "Mirandópolis"
+        ],
+        "min": "04000000",
+        "max": "04099999"
+    },
+    {
+        "position": "Zona Sul",
+        "region": "ITAIM BIBI",
+        "districts": [
+            "Brooklin Novo",
+            "Itaim Bibi",
+            "Vila Olímpia",
+            "Moema",
+            "Vila Nova Conceição"
+        ],
+        "min": "04500000",
+        "max": "04583999"
+    },
+    {
+        "position": "Zona Leste",
+        "region": "BRÁS",
+        "districts": [
+            "Belenzinho",
+            "Brás",
+            "Belém",
+            "Pari",
+            "Canindé",
+            "Catumbi",
+            "ParqueS.Jorge"
+        ],
+        "min": "03000000",
+        "max": "03090999"
+    },
+    {
+        "position": "Zona Leste",
+        "region": "MOÓCA",
+        "districts": [
+            "Moóca",
+            "Alto da Moóca",
+            "Vila Prudente",
+            "A. Rosa",
+            "Quarta Parada",
+            "Parque Moóca",
+            "Vila Zelina"
+        ],
+        "min": "03100000",
+        "max": "03195999"
+    }
+]

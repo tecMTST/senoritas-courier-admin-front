@@ -1,9 +1,7 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import { injectStyle } from "react-toastify/dist/inject-style";
-import Header from "./components/Header";
-import Menu from "./components/Menu";
-import Footer from "./components/Footer";
+import { AuthProvider } from "./auth";
 import Routes from "./routes";
 import * as S from "./utils/style";
 import "./utils/style.css";
@@ -12,14 +10,11 @@ injectStyle();
 
 const App = (): JSX.Element => (
   <>
-    <S.Main>
-      <Header />
-      <Menu />
-      <S.Container>
+    <AuthProvider>
+      <S.Main>
         <Routes />
-      </S.Container>
-      <Footer />
-    </S.Main>
+      </S.Main>
+    </AuthProvider>
     <ToastContainer autoClose={3000} />
   </>
 );

@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Input = styled.div<{
   $variant?: string;
   $width?: string;
+  $color?: string;
   $error?: boolean;
 }>`
   width: ${(props) => props?.$width ?? "25%"};
@@ -33,7 +34,7 @@ export const Input = styled.div<{
       font-style: normal;
       font-weight: 400;
       line-height: 21px;
-      color: #272727;
+      color: ${(props) => (!!props?.$color ? props?.$color : "#272727")};
     }
 
     label:not(.MuiInputLabel-shrink) {
@@ -80,6 +81,7 @@ export const Input = styled.div<{
         padding: ${(props) =>
           props?.$variant === "filled" ? "0 8px 8px 16px" : "12px 16px;"};
         font-family: "Public Sans";
+
         color: #272727;
         font-size: 14px;
         font-style: normal;
@@ -93,7 +95,8 @@ export const Input = styled.div<{
 
       fieldset {
         border-radius: 24px;
-        border: 1px solid #c3ccd6;
+        border: 1px solid
+          ${(props) => (!!props?.$color ? props?.$color : "#c3ccd6")};
       }
     }
   }

@@ -16,6 +16,7 @@ interface Props {
   options: { icon?: JSX.Element; label: string; value: string | number }[];
   variant: "filled" | "standard" | "outlined";
   classname?: string;
+  width?: string
 }
 
 const Select = ({
@@ -28,12 +29,13 @@ const Select = ({
   helperText,
   variant,
   classname,
+  width,
   ...props
 }: Props & SelectProps): JSX.Element => {
   const [visited, setVisited] = useState<boolean>(!!value);
 
   return (
-    <S.Input className={classname ?? ""}>
+    <S.Input className={classname ?? ""} $width={width}>
       {classname === "without-label" && (
         <S.Label $variant="standard">{label}</S.Label>
       )}

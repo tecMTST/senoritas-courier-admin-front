@@ -5,33 +5,24 @@ import Layout from "../../components/Layout";
 import Select from "../../components/Inputs/select";
 import Table, { Column } from "../../components/Table";
 import { OrderStatus } from "../../utils/constants";
-import {
-  approveOrder,
-  getBiker,
-  getItineraryByOder,
-  getOrder,
-  updateItinerary,
-} from "../../services/api";
-import { Biker, OrderFormTDO, OrderTDO } from "../../utils/types";
-import View from "./modal/View";
+import { approveOrder, getOrder } from "../../services/api";
+import { OrderFormTDO } from "../../utils/types";
 import Dot from "../../assets/icons/Dot";
 import TextField from "../../components/Inputs/textField";
 import * as S from "../style";
 
-const SingleDeliveries = (): JSX.Element => {
+interface Props {
+  onItinerary: (row: OrderFormTDO) => void;
+}
+
+const ViewOrder = ({ onItinerary }: Props): JSX.Element => {
   const [filters, setFilters] = useState<{
     status?: string;
-    biker?: string;
     client?: string;
   }>();
 
-  const [bikers, setBikers] = useState<Biker[]>([]);
-
   const [data, setData] = useState<OrderFormTDO[]>();
   const [dataFiltered, setDataFiltered] = useState<OrderFormTDO[]>();
-
-  const [openModal, setOpenModal] = useState(false);
-  const [selected, setSelected] = useState<OrderFormTDO>();
 
   const getOptions = useCallback(
     (value: any, hasAllOptions?: boolean, hasIcon?: boolean) => {
@@ -66,14 +57,13 @@ const SingleDeliveries = (): JSX.Element => {
 
   const getDataFiltered = useCallback(
     (value?: OrderFormTDO[]) => {
-      const { biker, client, status } = filters ?? {};
+      const { client, status } = filters ?? {};
 
       const filtered = (value ?? data)?.filter(
         (item) =>
           (!client ||
             item?.clientName?.toLowerCase()?.includes(client.toLowerCase())) &&
-          (!status || status === "Todos" || item?.orderStatus === status) &&
-          (!biker || biker === "Todos" || item?.bikerId === biker)
+          (!status || status === "Todos" || item?.orderStatus === status)
       );
       setDataFiltered(filtered);
     },
@@ -81,27 +71,13 @@ const SingleDeliveries = (): JSX.Element => {
   );
 
   const getData = useCallback(async () => {
-    const bikers = await getBiker();
-    setBikers(bikers);
-
     const orders = await getOrder();
-    const getItinerariesPromises = [];
-
-    for (let i = 0; i < orders?.length; i += 1)
-      getItinerariesPromises.push(getItineraryByOder(orders[i]?.id ?? ""));
-
-    const itineraries = await Promise.all(getItinerariesPromises);
-
-    const customOrder = orders.map((item, index) => ({
+    const customOrder = orders.map((item) => ({
       ...item,
       clientName: item?.client?.name,
       clientContact: item?.client?.phone,
       deliveryDate: moment(item?.order?.deliveryDate).format("DD/MM/YYYY"),
       orderStatus: getStatus(item?.order?.approved),
-      itineraryStatus: itineraries[index][0]?.status ?? "Aguardando",
-      itineraryId: itineraries[index][0]?.id ?? "",
-      bikerId: itineraries[index][0]?.biker?.id ?? "",
-      bikerName: itineraries[index][0]?.biker?.name ?? "",
     }));
 
     setData(customOrder);
@@ -133,29 +109,6 @@ const SingleDeliveries = (): JSX.Element => {
     [getData]
   );
 
-  const onChangeBiker = useCallback(
-    async (bikerId: string, row: OrderFormTDO) => {
-      await updateItinerary({ id: row?.itineraryId, biker: { id: bikerId } });
-      getData();
-    },
-    [getData]
-  );
-
-  const onRouteDetails = useCallback((item: any) => {
-    setOpenModal(true);
-    setSelected(item);
-  }, []);
-
-  const onClose = useCallback(() => {
-    setOpenModal(false);
-    setSelected(undefined);
-  }, []);
-
-  const getIsDisabled = useCallback((value: OrderTDO) => {
-    if (!value?.order?.approved) return true;
-    return false;
-  }, []);
-
   const columns = useMemo(
     () =>
       [
@@ -180,47 +133,28 @@ const SingleDeliveries = (): JSX.Element => {
           onChange: onChangeStatus,
         },
         {
-          id: "deliveryDate",
-          label: "Data de entrega",
-        },
-        {
-          id: "bikerId",
-          label: "Biker",
-          type: "select",
-          values: bikers.map((item) => ({
-            value: item?.id ?? "",
-            label: item?.name ?? "",
-          })),
-          onChange: onChangeBiker,
-          disabled: (value: OrderTDO) => getIsDisabled(value),
-        },
-        {
-          id: "itineraryStatus",
-          label: "Status entrega",
-        },
-        {
           id: "actions",
           type: "action",
         },
       ] as Column[],
-    [bikers, getIsDisabled, getOptions, onChangeBiker, onChangeStatus]
+    [getOptions, onChangeStatus]
   );
 
   const actions = useMemo(
     () => [
       {
         type: "primary",
-        text: "Ver detalhes da rota",
-        onClick: onRouteDetails,
+        text: "Ver detalhes do pedido",
+        onClick: onItinerary,
       },
     ],
-    [onRouteDetails]
+    [onItinerary]
   );
 
   return (
     <Layout>
       <S.Row className="space-between">
-        <S.Title>Entregas avulsas</S.Title>
+        <S.Title>Entregas múltiplas</S.Title>
       </S.Row>
       <S.Row>
         <TextField
@@ -238,13 +172,6 @@ const SingleDeliveries = (): JSX.Element => {
           value={filters?.status ?? ""}
           onChange={(e) => onChangeFilter(e, "status")}
         />
-        <Select
-          variant="outlined"
-          label="Biker"
-          options={getOptions(bikers, true)}
-          value={filters?.biker ?? ""}
-          onChange={(e) => onChangeFilter(e, "biker")}
-        />
       </S.Row>
 
       <Table
@@ -254,14 +181,8 @@ const SingleDeliveries = (): JSX.Element => {
         rows={dataFiltered}
         actions={actions}
       />
-
-      <View
-        open={openModal}
-        onClose={onClose}
-        data={selected}
-      />
     </Layout>
   );
 };
 
-export default memo(SingleDeliveries);
+export default memo(ViewOrder);
