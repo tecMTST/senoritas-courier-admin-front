@@ -92,17 +92,25 @@ const SingleDeliveries = (): JSX.Element => {
 
     const itineraries = await Promise.all(getItinerariesPromises);
 
-    const customOrder = orders.map((item, index) => ({
-      ...item,
-      clientName: item?.client?.name,
-      clientContact: item?.client?.phone,
-      deliveryDate: moment(item?.order?.deliveryDate).format("DD/MM/YYYY"),
-      orderStatus: getStatus(item?.order?.approved),
-      itineraryStatus: itineraries[index][0]?.status ?? "Aguardando",
-      itineraryId: itineraries[index][0]?.id ?? "",
-      bikerId: itineraries[index][0]?.biker?.id ?? "",
-      bikerName: itineraries[index][0]?.biker?.name ?? "",
-    }));
+    const customOrder = orders
+      .map((item, index) => ({
+        ...item,
+        clientName: item?.client?.name,
+        clientContact: item?.client?.phone,
+        deliveryDate: moment(item?.order?.deliveryDate).format("DD/MM/YYYY"),
+        orderStatus: getStatus(item?.order?.approved),
+        itineraryStatus: itineraries[index][0]?.status ?? "Aguardando",
+        itineraryId: itineraries[index][0]?.id ?? "",
+        bikerId: itineraries[index][0]?.biker?.id ?? "",
+        bikerName: itineraries[index][0]?.biker?.name ?? "",
+      }))
+      .filter(
+        (item) =>
+          item?.delivery &&
+          item?.pickup &&
+          item?.delivery?.length === 1 &&
+          item?.pickup?.length === 1
+      );
 
     setData(customOrder);
     getDataFiltered(customOrder);
@@ -255,11 +263,7 @@ const SingleDeliveries = (): JSX.Element => {
         actions={actions}
       />
 
-      <View
-        open={openModal}
-        onClose={onClose}
-        data={selected}
-      />
+      <View open={openModal} onClose={onClose} data={selected} />
     </Layout>
   );
 };

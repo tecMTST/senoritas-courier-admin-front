@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Login = styled.div`
   position: absolute;
-  max-height: calc(100vh - 98px - 198px);
+  max-height: calc(100vh - 98px - 126px);
   overflow: auto;
   width: 100%;
   left: 50%;
@@ -12,6 +12,10 @@ export const Login = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 16px;
+
+  button {
+    width: 25%;
+  }
 `;
 
 export const Container = styled.div`
@@ -29,8 +33,8 @@ export const Row = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding: 16px 0;
-  gap: 16px;
+  padding: 12px 0;
+  gap: 12px;
 
   &.margin-bottom-40 {
     margin-bottom: 40px;

@@ -5,6 +5,7 @@ import React, {
   useContext,
   useMemo,
 } from "react";
+import { useHistory } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { api, login } from "./services/api";
 
@@ -13,7 +14,7 @@ interface Props {
 }
 
 interface IAuthContext {
-  isValidToken: (token: string) => boolean;
+  isValidToken: (token?: string) => boolean;
   signIn: (email: string, password: string) => Promise<boolean>;
   signOut: () => void;
 }
@@ -21,24 +22,23 @@ interface IAuthContext {
 const AuthContext = createContext({} as IAuthContext);
 
 export const AuthProvider = ({ children }: Props): JSX.Element => {
-  const isValidToken = useCallback((token: string) => {
-    if (!!token) {
-      const decoded = jwtDecode(token);
-      console.log(decoded?.exp && decoded?.exp < Date.now() / 1000);
+  const history = useHistory();
 
-      //   try {
-      //     if (
-      //       !decoded ||
-      //       decoded.exp ||
-      //       (decoded?.exp && decoded?.exp < Date.now() / 1000)
-      //     )
-      //       return false;
-      //   } catch {
-      //     return false;
-      //   }
-    } else return false;
+  const isValidToken = useCallback((token?: string) => {
+    const accessToken = token ?? localStorage.getItem("@SESSION:token");
 
-    api.defaults.headers.authorization = `Bearer ${token}`;
+    if (!accessToken)
+      return false
+    
+    try {
+      const decoded = jwtDecode(accessToken);
+      if (!decoded || !decoded?.exp || decoded?.exp * 1000 < Date.now())
+        return false
+    } catch {
+      return false
+    }
+
+    api.defaults.headers.authorization = `Bearer ${accessToken}`;
     return true;
   }, []);
 
@@ -49,10 +49,10 @@ export const AuthProvider = ({ children }: Props): JSX.Element => {
 
       if (accessToken && isValidToken(accessToken)) {
         api.defaults.headers.authorization = `Bearer ${accessToken}`;
-        sessionStorage.setItem("@SESSION:token", accessToken);
+        localStorage.setItem("@SESSION:token", accessToken);
 
         if (refreshToken)
-          sessionStorage.setItem("@SESSION:refreshToken", accessToken);
+          localStorage.setItem("@SESSION:refreshToken", accessToken);
 
         return true;
       }
@@ -62,7 +62,11 @@ export const AuthProvider = ({ children }: Props): JSX.Element => {
     [isValidToken]
   );
 
-  const signOut = useCallback(() => sessionStorage.clear(), []);
+  const signOut = useCallback(() => {
+    api.defaults.headers.authorization = '';
+    localStorage.clear();
+    history.push("/");
+  }, [history]);
 
   const value = useMemo(
     () => ({

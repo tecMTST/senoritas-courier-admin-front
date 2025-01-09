@@ -72,13 +72,20 @@ const ViewOrder = ({ onItinerary }: Props): JSX.Element => {
 
   const getData = useCallback(async () => {
     const orders = await getOrder();
-    const customOrder = orders.map((item) => ({
-      ...item,
-      clientName: item?.client?.name,
-      clientContact: item?.client?.phone,
-      deliveryDate: moment(item?.order?.deliveryDate).format("DD/MM/YYYY"),
-      orderStatus: getStatus(item?.order?.approved),
-    }));
+    const customOrder = orders
+      .map((item) => ({
+        ...item,
+        clientName: item?.client?.name,
+        clientContact: item?.client?.phone,
+        deliveryDate: moment(item?.order?.deliveryDate).format("DD/MM/YYYY"),
+        orderStatus: getStatus(item?.order?.approved),
+      }))
+      .filter(
+        (item) =>
+          item?.delivery &&
+          item?.pickup &&
+          (item?.delivery?.length > 1 || item?.pickup?.length > 1)
+      );
 
     setData(customOrder);
     getDataFiltered(customOrder);

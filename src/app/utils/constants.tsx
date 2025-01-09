@@ -27,6 +27,7 @@ export const OrderStatus = [
   {
     icon: <Dot color="#FFA800" />,
     text: "Em aprovação",
+    disabled: true,
   },
   {
     icon: <Dot color="#D10F0F" />,

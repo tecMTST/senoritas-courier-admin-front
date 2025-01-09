@@ -8,11 +8,11 @@ export const Main = styled.div`
 
 export const Container = styled.div`
   position: absolute;
-  top: 102px;
-  left: 180px;
-  padding: 48px 32px;
-  width: calc(100% - 180px - 64px);
-  height: calc(100vh - 102px - 124px - 164px);
+  top: 74px;
+  left: 172px;
+  padding: 12px;
+  width: calc(100% - 196px);
+  height: calc(100vh - 74px - 148px);
   overflow: auto;
 
   .width-auto {

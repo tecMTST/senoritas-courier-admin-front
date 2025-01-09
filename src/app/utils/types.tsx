@@ -108,7 +108,7 @@ export interface OrderResponse {
   comments?: string;
   price?: number | null;
   approvedClient?: boolean;
-  approved?: boolean;
+  approved?: boolean | null;
 }
 
 export interface PickupRequest extends Address {

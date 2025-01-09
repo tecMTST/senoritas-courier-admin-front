@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import {
   Biker,
   ClientRequest,
@@ -34,6 +35,7 @@ export const getOrder = async (): Promise<OrderTDO[]> => {
     const response = await api.get("/order");
     return response?.data ?? [];
   } catch (err) {
+    toast.error("Ops! Não foi possível carregar pedido.");
     console.warn(err);
     return [];
   }
@@ -45,8 +47,10 @@ export const approveOrder = async (data: {
 }): Promise<boolean> => {
   try {
     await api.post("/admin/order/approve", data);
+    toast.success("Seu pedido foi alterado com sucesso!");
     return true;
   } catch (err) {
+    toast.error("Ops! Erro ao alterar pedido.");
     console.warn(err);
     return false;
   }
@@ -57,6 +61,7 @@ export const getBiker = async (): Promise<Biker[]> => {
     const response = await api.get("/biker");
     return response?.data ?? [];
   } catch (err) {
+    toast.error("Ops! Não foi possível carregar biker.");
     console.warn(err);
     return [];
   }
@@ -65,8 +70,10 @@ export const getBiker = async (): Promise<Biker[]> => {
 export const createBiker = async (data: Biker): Promise<Biker> => {
   try {
     const response = await api.post("/biker", data);
+    toast.success("Biker criada com sucesso!")
     return response?.data ?? {};
   } catch (err) {
+    toast.error("Ops! Erro ao criar biker.")
     console.warn(err);
     return {};
   }
@@ -75,8 +82,10 @@ export const createBiker = async (data: Biker): Promise<Biker> => {
 export const updateBiker = async (data: Biker): Promise<Biker> => {
   try {
     const response = await api.put("/biker", data);
+    toast.success("Biker atualizada com sucesso!");
     return response?.data ?? {};
   } catch (err) {
+    toast.error("Ops! Erro ao atualizar biker.");
     console.warn(err);
     return {};
   }
@@ -85,8 +94,10 @@ export const updateBiker = async (data: Biker): Promise<Biker> => {
 export const deleteBiker = async (id: string): Promise<boolean> => {
   try {
     await api.delete(`/biker/${id}`);
+    toast.success("Biker excluída com sucesso!");
     return true;
   } catch (err) {
+    toast.error("Ops! Erro ao excluir biker.");
     console.warn(err);
     return false;
   }
@@ -96,6 +107,7 @@ export const getClient = async (): Promise<ClientResponse[]> => {
     const response = await api.get("/client");
     return response?.data ?? [];
   } catch (err) {
+    toast.error("Ops! Não foi possível carregar cliente.");
     console.warn(err);
     return [];
   }
@@ -106,8 +118,10 @@ export const updateClient = async (
 ): Promise<ClientResponse> => {
   try {
     const response = await api.put("/client", data);
+    toast.success("Cliente atualizado com sucesso!");
     return response?.data ?? {};
   } catch (err) {
+    toast.error("Ops! Erro ao atualizar cliente.");
     console.warn(err);
     return {};
   }
@@ -116,8 +130,10 @@ export const updateClient = async (
 export const deleteClient = async (id: string): Promise<boolean> => {
   try {
     await api.delete("/client", { data: { id } });
+    toast.success("Cliente excluído com sucesso!");
     return true;
   } catch (err) {
+    toast.error("Ops! Erro ao excluir cliente.");
     console.warn(err);
     return false;
   }
@@ -128,6 +144,7 @@ export const getItinerary = async (): Promise<Itinerary[]> => {
     const response = await api.get("/itinerary");
     return response?.data ?? [];
   } catch (err) {
+    toast.error("Ops! Não foi possível carregar itinerário.");
     console.warn(err);
     return [];
   }
@@ -140,6 +157,7 @@ export const getItineraryByOder = async (
     const response = await api.get(`/itinerary/?orderId=${orderId}`);
     return response?.data ?? [];
   } catch (err) {
+    toast.error("Ops! Não foi possível carregar itinerário.");
     console.warn(err);
     return [];
   }
@@ -152,6 +170,7 @@ export const getItineraryByBiker = async (
     const response = await api.get(`/itinerary/?bikerId=${bikerId}`);
     return response?.data ?? [];
   } catch (err) {
+    toast.error("Ops! Não foi possível carregar itinerário.");
     console.warn(err);
     return [];
   }
@@ -167,6 +186,7 @@ export const getItineraryByBikerAndOrder = async (
     );
     return response?.data ?? [];
   } catch (err) {
+    toast.error("Ops! Não foi possível carregar itinerário.");
     console.warn(err);
     return [];
   }
@@ -177,8 +197,10 @@ export const updateItinerary = async (
 ): Promise<Itinerary[]> => {
   try {
     const response = await api.put("/itinerary", data);
+    toast.success("Itinerário atualizado com sucesso!");
     return response?.data ?? [];
   } catch (err) {
+    toast.error("Ops! Erro ao atualizar itinerário.");
     console.warn(err);
     return [];
   }
@@ -191,6 +213,7 @@ export const login = async (user: {
     const response = await api.post("/admin/login", user);
     return response?.data;
   } catch (err) {
+    toast.error("Ops! Não foi possível efetuar login.");
     console.warn(err);
     return {};
   }

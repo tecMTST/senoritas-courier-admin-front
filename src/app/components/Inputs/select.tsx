@@ -13,7 +13,7 @@ interface Props {
   required?: boolean;
   helperText?: string;
   error?: boolean;
-  options: { icon?: JSX.Element; label: string; value: string | number }[];
+  options: { icon?: JSX.Element; label: string; value: string | number; disabled?: boolean }[];
   variant: "filled" | "standard" | "outlined";
   classname?: string;
   width?: string
@@ -55,7 +55,7 @@ const Select = ({
             <em> </em>
           </MenuItem>
           {options.map((item) => (
-            <MenuItem key={Math.random()} value={item.value}>
+            <MenuItem key={Math.random()} value={item.value} disabled={item?.disabled}>
               {item?.icon && item?.icon}
               {item.label}
             </MenuItem>

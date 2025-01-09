@@ -21,6 +21,13 @@ const Login = (): JSX.Element => {
     else setError("Ops! Verifique seu e-mail e/ou senha.");
   }, [email, history, password, signIn]);
 
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      login();
+    }
+  });
+
   return (
     <>
       <Header />

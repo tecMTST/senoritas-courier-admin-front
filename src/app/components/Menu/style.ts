@@ -4,9 +4,9 @@ export const Menu = styled.div`
   background: #edf0f7;
   overflow: auto;
   display: flex;
-  top: 98px;
+  top: 74px;
   position: fixed;
-  max-height: calc(100% - 102px - 124px);
+  max-height: calc(100% - 74px - 124px);
   flex-direction: column;
   border-right: 2px solid #00b596;
 `;
@@ -42,4 +42,18 @@ export const Label = styled.label`
   font-style: normal;
   font-weight: 700;
   line-height: 24px;
+`;
+
+export const SignOut = styled.button`
+  cursor: pointer;
+  display: flex;
+  padding: 12px 24px;
+  align-items: center;
+  background: none;
+  border: none;
+  color: #717d96;
+
+  &:hover {
+    color: #00B596;
+  }
 `;

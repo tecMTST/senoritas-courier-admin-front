@@ -1,10 +1,12 @@
 import React, { memo, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useAuth } from "../../auth";
 import MenuIcon from "../../assets/icons/MenuIcon";
 import * as S from "./style";
 
 const Menu = (): JSX.Element => {
   const history = useHistory();
+  const { signOut } = useAuth();
   const [selected, setSelected] = useState(
     history.location.pathname.replace("/", "") ?? ""
   );
@@ -66,6 +68,7 @@ const Menu = (): JSX.Element => {
           </S.Item>
         ))}
       </S.Items>
+      <S.SignOut onClick={signOut}>Sair</S.SignOut>
     </S.Menu>
   );
 };

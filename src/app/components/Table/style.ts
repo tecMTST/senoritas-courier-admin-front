@@ -36,7 +36,7 @@ export const Table = styled.div<{ $boldHead?: boolean; $borderHead?: boolean }>`
     .MuiTableCell-head {
       border-bottom: ${(props) =>
         props?.$borderHead ? "1px solid #C3CCD6" : "none"};
-      padding: 24px 16px;
+      padding: 12px 8px;
       font-weight: ${(props) => (props?.$boldHead ? "700 !important" : "400")};
     }
 
@@ -47,6 +47,7 @@ export const Table = styled.div<{ $boldHead?: boolean; $borderHead?: boolean }>`
       font-style: normal;
       font-weight: 400;
       line-height: 21px;
+      padding: 8px;
     }
   }
 `;
@@ -66,7 +67,7 @@ export const HeadCel = styled.div`
 
 export const Empty = styled.tr`
   display: flex;
-  padding: 16px;
+  padding: 8px;
   color: #505862;
   font-family: "Public Sans";
   font-size: 14px;
