@@ -1,6 +1,8 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
-import Layout from "../../components/Layout";
+import Button from "../../components/Button";
 import Select from "../../components/Inputs/select";
+import Layout from "../../components/Layout";
+import Loading from "../../components/Loading";
 import Table, { Column } from "../../components/Table";
 import {
   getBiker,
@@ -15,7 +17,6 @@ import {
 } from "../../utils/types";
 import View from "./modal/View";
 import Dot from "../../assets/icons/Dot";
-import Button from "../../components/Button";
 import ArrowLeft from "../../assets/icons/ArrowLeft";
 import * as S from "../style";
 
@@ -34,6 +35,8 @@ const ViewItinerary = ({ order, onOrder }: Props): JSX.Element => {
 
   const [openModal, setOpenModal] = useState(false);
   const [selected, setSelected] = useState<ItineraryFormTDO>();
+
+  const [loading, setLoading] = useState(true);
 
   const getOptions = useCallback(
     (value: any, hasAllOptions?: boolean, hasIcon?: boolean) => {
@@ -90,6 +93,7 @@ const ViewItinerary = ({ order, onOrder }: Props): JSX.Element => {
     );
 
     setData(customItirnerary);
+    setLoading(false);
   }, [order]);
 
   useEffect(() => {
@@ -116,6 +120,7 @@ const ViewItinerary = ({ order, onOrder }: Props): JSX.Element => {
 
   const onChangeBiker = useCallback(
     async (bikerId: string, row: OrderFormTDO) => {
+      setLoading(true);
       await updateItinerary({ id: row?.itineraryId, biker: { id: bikerId } });
       getData();
     },
@@ -179,6 +184,7 @@ const ViewItinerary = ({ order, onOrder }: Props): JSX.Element => {
 
   return (
     <Layout>
+      <Loading loading={loading} />
       <Button
         inline
         startIcon

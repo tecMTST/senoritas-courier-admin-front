@@ -2,6 +2,7 @@ import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 import moment from "moment";
 import Search from "../../assets/icons/Search";
 import Layout from "../../components/Layout";
+import Loading from "../../components/Loading";
 import Select from "../../components/Inputs/select";
 import Table, { Column } from "../../components/Table";
 import { OrderStatus } from "../../utils/constants";
@@ -23,6 +24,8 @@ const ViewOrder = ({ onItinerary }: Props): JSX.Element => {
 
   const [data, setData] = useState<OrderFormTDO[]>();
   const [dataFiltered, setDataFiltered] = useState<OrderFormTDO[]>();
+
+  const [loading, setLoading] = useState(true);
 
   const getOptions = useCallback(
     (value: any, hasAllOptions?: boolean, hasIcon?: boolean) => {
@@ -89,6 +92,7 @@ const ViewOrder = ({ onItinerary }: Props): JSX.Element => {
 
     setData(customOrder);
     getDataFiltered(customOrder);
+    setLoading(false);
   }, [getDataFiltered, getStatus]);
 
   useEffect(() => {
@@ -107,6 +111,7 @@ const ViewOrder = ({ onItinerary }: Props): JSX.Element => {
 
   const onChangeStatus = useCallback(
     async (value: string, row: OrderFormTDO) => {
+      setLoading(true);
       if (value === "Aprovado")
         await approveOrder({ id: row?.id ?? "", approved: true });
       if (value === "Cancelado")
@@ -160,6 +165,7 @@ const ViewOrder = ({ onItinerary }: Props): JSX.Element => {
 
   return (
     <Layout>
+      <Loading loading={loading} />
       <S.Row className="space-between">
         <S.Title>Entregas múltiplas</S.Title>
       </S.Row>

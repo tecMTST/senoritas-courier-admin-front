@@ -2,6 +2,7 @@ import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 import moment from "moment";
 import Search from "../../assets/icons/Search";
 import Layout from "../../components/Layout";
+import Loading from "../../components/Loading";
 import Select from "../../components/Inputs/select";
 import Table, { Column } from "../../components/Table";
 import { OrderStatus } from "../../utils/constants";
@@ -32,6 +33,8 @@ const SingleDeliveries = (): JSX.Element => {
 
   const [openModal, setOpenModal] = useState(false);
   const [selected, setSelected] = useState<OrderFormTDO>();
+
+  const [loading, setLoading] = useState(true);
 
   const getOptions = useCallback(
     (value: any, hasAllOptions?: boolean, hasIcon?: boolean) => {
@@ -114,6 +117,7 @@ const SingleDeliveries = (): JSX.Element => {
 
     setData(customOrder);
     getDataFiltered(customOrder);
+    setLoading(false);
   }, [getDataFiltered, getStatus]);
 
   useEffect(() => {
@@ -132,6 +136,7 @@ const SingleDeliveries = (): JSX.Element => {
 
   const onChangeStatus = useCallback(
     async (value: string, row: OrderFormTDO) => {
+      setLoading(true);
       if (value === "Aprovado")
         await approveOrder({ id: row?.id ?? "", approved: true });
       if (value === "Cancelado")
@@ -143,6 +148,7 @@ const SingleDeliveries = (): JSX.Element => {
 
   const onChangeBiker = useCallback(
     async (bikerId: string, row: OrderFormTDO) => {
+      setLoading(true);
       await updateItinerary({ id: row?.itineraryId, biker: { id: bikerId } });
       getData();
     },
@@ -227,6 +233,7 @@ const SingleDeliveries = (): JSX.Element => {
 
   return (
     <Layout>
+      <Loading loading={loading} />
       <S.Row className="space-between">
         <S.Title>Entregas avulsas</S.Title>
       </S.Row>

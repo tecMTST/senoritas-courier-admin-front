@@ -1,9 +1,10 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
+import Button from "../../components/Button";
 import Layout from "../../components/Layout";
+import Loading from "../../components/Loading";
 import Table, { Column } from "../../components/Table";
 import { getItineraryByBiker } from "../../services/api";
 import { ItineraryFormTDO } from "../../utils/types";
-import Button from "../../components/Button";
 import ArrowLeft from "../../assets/icons/ArrowLeft";
 import * as S from "../style";
 
@@ -71,6 +72,7 @@ const ViewItinerary = ({ bikerId, onBiker }: Props): JSX.Element => {
 
   return (
     <Layout>
+      <Loading loading={!data} />
       <Button
         inline
         startIcon

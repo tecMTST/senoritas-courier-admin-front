@@ -1,5 +1,9 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
+import Button from "../../components/Button";
+import TextField from "../../components/Inputs/textField";
 import Layout from "../../components/Layout";
+import Loading from "../../components/Loading";
+import Table, { Column } from "../../components/Table";
 import {
   createBiker,
   deleteBiker,
@@ -7,15 +11,12 @@ import {
   updateBiker,
 } from "../../services/api";
 import { Biker } from "../../utils/types";
-import Table, { Column } from "../../components/Table";
+import Delete from "../../assets/icons/Delete";
 import EditInline from "../../assets/icons/EditInline";
-import BikerImg from "../../assets/images/biker.svg";
-import Button from "../../components/Button";
 import Plus from "../../assets/icons/Plus";
 import Search from "../../assets/icons/Search";
+import BikerImg from "../../assets/images/biker.svg";
 import NewEdit from "./modal/NewEdit";
-import TextField from "../../components/Inputs/textField";
-import Delete from "../../assets/icons/Delete";
 import * as S from "../style";
 
 interface Props {
@@ -28,6 +29,7 @@ const ViewBikers = ({ onItinerary }: Props): JSX.Element => {
   const [dataFiltered, setDataFiltered] = useState<Biker[]>();
   const [selected, setSelected] = useState<Biker>();
   const [openModal, setOpenModal] = useState(false);
+  const [loading,  setLoading] = useState(true);
 
   const filterByName = useCallback(() => {
     const filtered = data?.filter(
@@ -45,6 +47,7 @@ const ViewBikers = ({ onItinerary }: Props): JSX.Element => {
       phone: item?.contact?.phone,
     }));
     setData(bikers);
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -71,6 +74,7 @@ const ViewBikers = ({ onItinerary }: Props): JSX.Element => {
 
   const onSave = useCallback(
     async (payload: Biker) => {
+      setLoading(true);
       delete payload?.phone;
       delete payload?.zipCode;
 
@@ -81,12 +85,14 @@ const ViewBikers = ({ onItinerary }: Props): JSX.Element => {
 
       getData();
       onClose();
+      setLoading(false);
     },
     [getData, onClose]
   );
 
   const onRemove = useCallback(
     async (item: Biker) => {
+      setLoading(true);
       if (item?.id) await deleteBiker(item?.id);
       await getData();
     },
@@ -145,7 +151,8 @@ const ViewBikers = ({ onItinerary }: Props): JSX.Element => {
 
   return (
     <Layout>
-      {!data || data?.length === 0 ? (
+      <Loading loading={loading} />
+      {data?.length === 0 ? (
         <S.Container>
           <img src={BikerImg} alt="biker" />
           <S.Empty>Nenhuma biker cadastrada</S.Empty>

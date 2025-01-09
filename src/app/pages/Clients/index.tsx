@@ -1,10 +1,11 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 import Layout from "../../components/Layout";
+import Loading from "../../components/Loading";
+import TextField from "../../components/Inputs/textField";
 import Table, { Column } from "../../components/Table";
 import { deleteClient, getClient } from "../../services/api";
 import { ClientResponse } from "../../utils/types";
 import Delete from "../../assets/icons/Delete";
-import TextField from "../../components/Inputs/textField";
 import Search from "../../assets/icons/Search";
 import * as S from "../style";
 
@@ -92,6 +93,7 @@ const Clients = (): JSX.Element => {
 
   return (
     <Layout>
+      <Loading loading={!data} />
       <S.Row className="space-between">
         <S.Title>Clientes</S.Title>
       </S.Row>
