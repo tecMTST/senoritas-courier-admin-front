@@ -20,6 +20,8 @@ interface Props {
     onClick: () => void;
     primary?: boolean;
     inline?: boolean;
+    hide?: boolean;
+    disabled?: boolean;
   }[];
   color?: string;
   width?: string;
@@ -68,15 +70,18 @@ const Modal = ({
     {buttons && buttons?.length > 0 && (
       <S.Footer>
         <DialogActions>
-          {buttons?.map((item) => (
-            <Button
-              key={Math.random()}
-              onClick={item.onClick}
-              text={item.text}
-              primary={item?.primary}
-              inline={item?.inline}
-            />
-          ))}
+          {buttons
+            ?.filter?.((item) => !item?.hide)
+            ?.map((item) => (
+              <Button
+                key={Math.random()}
+                onClick={item.onClick}
+                text={item.text}
+                primary={item?.primary}
+                inline={item?.inline}
+                disabled={item?.disabled}
+              />
+            ))}
         </DialogActions>
       </S.Footer>
     )}

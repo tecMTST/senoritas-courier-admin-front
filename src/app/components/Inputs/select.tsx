@@ -13,9 +13,10 @@ interface Props {
   required?: boolean;
   helperText?: string;
   error?: boolean;
-  options: { icon?: JSX.Element; label: string; value: string | number }[];
+  options: { icon?: JSX.Element; label: string; value: string | number; disabled?: boolean }[];
   variant: "filled" | "standard" | "outlined";
   classname?: string;
+  width?: string
 }
 
 const Select = ({
@@ -28,12 +29,13 @@ const Select = ({
   helperText,
   variant,
   classname,
+  width,
   ...props
 }: Props & SelectProps): JSX.Element => {
   const [visited, setVisited] = useState<boolean>(!!value);
 
   return (
-    <S.Input className={classname ?? ""}>
+    <S.Input className={classname ?? ""} $width={width}>
       {classname === "without-label" && (
         <S.Label $variant="standard">{label}</S.Label>
       )}
@@ -53,7 +55,7 @@ const Select = ({
             <em> </em>
           </MenuItem>
           {options.map((item) => (
-            <MenuItem key={Math.random()} value={item.value}>
+            <MenuItem key={Math.random()} value={item.value} disabled={item?.disabled}>
               {item?.icon && item?.icon}
               {item.label}
             </MenuItem>

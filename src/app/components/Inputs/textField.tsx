@@ -1,10 +1,16 @@
 import React, { memo, useState } from "react";
-import { TextField as TextFieldMUI, TextFieldProps } from "@mui/material";
+import {
+  InputAdornment,
+  TextField as TextFieldMUI,
+  TextFieldProps,
+} from "@mui/material";
 import * as S from "./style";
 
 interface Props {
   id: string;
-  text: string;
+  icon?: JSX.Element;
+  inputColor?: string;
+  text?: string;
   error?: boolean;
   maxLength?: number;
   width?: string;
@@ -13,6 +19,8 @@ interface Props {
 
 const TextField = ({
   id,
+  icon,
+  inputColor,
   text,
   error,
   maxLength,
@@ -30,14 +38,24 @@ const TextField = ({
       onFocus={() => setVisited(false)}
       $variant={variant ?? "outlined"}
       $width={width}
+      $color={inputColor}
     >
-      <S.Label $variant={variant ?? "outlined"}>{text}</S.Label>
+      {text && <S.Label $variant={variant ?? "outlined"}>{text}</S.Label>}
       <TextFieldMUI
         id={id}
         variant={variant ?? "outlined"}
         inputProps={{ maxLength }}
         error={visited && (error || (required && !value))}
         value={value}
+        InputProps={
+          icon
+            ? {
+                endAdornment: (
+                  <InputAdornment position="end">{icon}</InputAdornment>
+                ),
+              }
+            : undefined
+        }
         {...props}
       />
     </S.Input>

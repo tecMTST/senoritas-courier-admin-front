@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Footer = styled.div`
-  padding: 32px 0;
+  padding: 12px 0;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -22,5 +22,4 @@ export const Label = styled.label`
   font-weight: 400;
   line-height: 20px;
   color: #00b596;
-  margin-bottom: 32px;
 `;

@@ -21,17 +21,18 @@ export interface Column {
   align?: "right" | "center" | "left" | "inherit" | "justify";
   fontWeight?: number;
   format?: (value: number) => string;
+  disabled?: (value: any) => boolean;
   orderBy?: boolean;
   type?: "action" | "select" | "number" | "text";
   values?: { label: string; value: string }[];
-  onChange?: (value: string, index: number) => void;
+  onChange?: (value: string, row: any) => void;
 }
 
 interface Props {
   boldHead?: boolean;
   borderHead?: boolean;
   columns: Column[];
-  rows?: { [x: string]: string | number }[];
+  rows?: any[];
   actions?: {
     hide?: boolean;
     type: string;
@@ -93,7 +94,7 @@ const Table = ({
             </TableHead>
             <TableBody>
               {rows && rows?.length > 0 ? (
-                rows?.slice(page * 10, page * 10 + 10)?.map((row, index) => (
+                rows?.slice(page * 10, page * 10 + 10)?.map((row) => (
                   <TableRow
                     key={Math.random()}
                     hover
@@ -139,9 +140,12 @@ const Table = ({
                                 if (column?.onChange)
                                   column?.onChange(
                                     e.target.value as string,
-                                    index
+                                    row
                                   );
                               }}
+                              disabled={
+                                column?.disabled && column?.disabled(row)
+                              }
                               classname="width-auto"
                             />
                           </TableCell>
