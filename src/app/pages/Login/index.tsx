@@ -5,7 +5,6 @@ import Button from "../../components/Button";
 import TextField from "../../components/Inputs/textField";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import Loading from "../../components/Loading";
 import * as S from "../style";
 
 const Login = (): JSX.Element => {
